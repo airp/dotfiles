@@ -4,13 +4,15 @@ filetype plugin on
 syntax enable           " 开启语法高亮功能
 syntax on               " 允许用指定语法高亮配色方案替换默认方案
 
-"set background=dark
 if has("gui_running")
+    set background=dark
     colorscheme solarized
 else
+    "set background=dark
+    "let g:solarized_termcolors=256
+    "colorscheme solarized
+    set t_Co=256
 endif
-
-set t_Co=256
 
 set history=500
 set number
@@ -29,8 +31,8 @@ nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 vnoremap <silent> <C-T> <Esc>:Ydv<CR> 
 noremap <leader>yd :Yde<CR>
 
-set autochdir
-set suffixesadd+=.h
+"set autochdir
+"set suffixesadd+=.h
 
 set pastetoggle=<f5>
 
@@ -46,7 +48,7 @@ nnoremap <silent> ]B :blast<CR>
 noremap l <Nop>
 noremap h <Nop>
 
-nnoremap <F4> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<CR><CR>
+"nnoremap <F4> :!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" > src.files | ctags -R --c++-kinds=+px --fields=+iaS --extra=+q -L src.files<CR><CR>
 
 " 在原有基础之上增加暂时关闭查找高亮的功能
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
@@ -60,11 +62,6 @@ xnoremap & :&&<CR>
 "set incsearch
 "set spell
 "cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
-
-"let Tlist_Show_One_File=1
-"let Tlist_Exit_OnlyWindow=1
-"let Tlist_Use_Right_Window=1
-"let Tlist_Auto_Open=0
 
 
 " 可视模式下*/#, 根据选中内容查询
@@ -111,8 +108,32 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest
 
 " 补全窗口配色
-highlight Pmenu    guibg=darkgrey  guifg=black
-highlight PmenuSel guibg=lightgrey guifg=black
+"highlight Pmenu    guibg=darkgrey  guifg=black
+"highlight PmenuSel guibg=lightgrey guifg=black
+
+
+"let g:ycm_complete_in_comments=1                            " 补全功能在注释中同样有效
+"let g:ycm_confirm_extra_conf=0                              " 允许vim加载.ycm_extra_conf.py文件,不再提示
+"let g:ycm_collect_identifiers_from_tags_files=1             " 开启 YCM 标签补全引擎
+""set tags+=~/ctags/tags/cpp                                  " 引入 C++ 标准库tags
+"set completeopt-=preview                                    " 补全内容不以分割子窗口形式出现，只显示补全列表
+"let g:ycm_min_num_of_chars_for_completion=1                 " 从第一个键入字符就开始罗列匹配项
+"let g:ycm_cache_omnifunc=0                                  " 禁止缓存匹配项，每次都重新生成匹配项
+"let g:ycm_seed_identifiers_with_syntax=1                    " 语法关键字补全
+"
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <F4> :YcmDiags<CR>
+
+nnoremap <Leader>fl :NERDTreeToggle<CR>
+let NERDTreeWinSize=32
+"let NERDTreeShowHidden=1                    " 显示隐藏文件
+let NERDTreeMinimalUI=1                     " NERDTree 子窗口中不显示冗余帮助信息
+let NERDTreeAutoDeleteBuffer=1              " 删除文件时自动删除文件对应 buffer
+
+nnoremap <leader>tl :TagbarToggle<CR>
+let g:tagbar_width=32
+let g:tagbar_compact=1
+"autocmd BufReadPost *.h,*.c,*.cpp,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 
 " Vundle Start
@@ -129,19 +150,16 @@ Bundle 'vimcdoc'
 Bundle 'STL-improved'
 Bundle 'OmniCppComplete'
 Bundle 'The-NERD-Commenter'
-"Bundle 'DfrankUtil'             " indexer 依赖项
-"Bundle 'vimprj'                 " indexer 依赖项
-"Bundle 'indexer'
-"Bundle 'nathanaelkane/vim-indent-guides'
 
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'bling/vim-airline'
-Bundle 'ianva/vim-youdao-translater'
+Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
-"Bundle 'maksimr/vim-translator'
-"Bundle 'kshenoy/vim-signature'
+Bundle 'ianva/vim-youdao-translater'
+"Bundle 'TimothyYe/vim-tips'                    " Need ruby enviroument
+"Bundle 'uguu-org/vim-matrix-screensaver'
 
 filetype plugin indent on     " required!
 " Vundle End
