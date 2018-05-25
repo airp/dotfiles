@@ -10,6 +10,7 @@ if has("gui_running")
 else
     "set background=dark
     "let g:solarized_termcolors=256
+    "let g:solarized_termtrans = 1
     "colorscheme solarized
     set t_Co=256
 endif
@@ -48,7 +49,7 @@ nnoremap <silent> ]B :blast<CR>
 noremap l <Nop>
 noremap h <Nop>
 
-"nnoremap <F4> :!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" > src.files | ctags -R --c++-kinds=+px --fields=+iaS --extra=+q -L src.files<CR><CR>
+" nnoremap <F4> :!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" > src.files | ctags -R --c++-kinds=+px --fields=+iaS --extra=+q -L src.files<CR><CR>
 
 " 在原有基础之上增加暂时关闭查找高亮的功能
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
@@ -112,17 +113,18 @@ set completeopt=menuone,menu,longest
 "highlight PmenuSel guibg=lightgrey guifg=black
 
 
-"let g:ycm_complete_in_comments=1                            " 补全功能在注释中同样有效
-"let g:ycm_confirm_extra_conf=0                              " 允许vim加载.ycm_extra_conf.py文件,不再提示
-"let g:ycm_collect_identifiers_from_tags_files=1             " 开启 YCM 标签补全引擎
-""set tags+=~/ctags/tags/cpp                                  " 引入 C++ 标准库tags
-"set completeopt-=preview                                    " 补全内容不以分割子窗口形式出现，只显示补全列表
-"let g:ycm_min_num_of_chars_for_completion=1                 " 从第一个键入字符就开始罗列匹配项
-"let g:ycm_cache_omnifunc=0                                  " 禁止缓存匹配项，每次都重新生成匹配项
-"let g:ycm_seed_identifiers_with_syntax=1                    " 语法关键字补全
-"
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"nnoremap <F4> :YcmDiags<CR>
+let g:ycm_complete_in_comments=1                            " 补全功能在注释中同样有效
+let g:ycm_confirm_extra_conf=0                              " 允许vim加载.ycm_extra_conf.py文件,不再提示
+let g:ycm_collect_identifiers_from_tags_files=1             " 开启 YCM 标签补全引擎
+"set tags+=~/ctags/tags/cpp                                  " 引入 C++ 标准库tags
+set completeopt-=preview                                    " 补全内容不以分割子窗口形式出现，只显示补全列表
+let g:ycm_min_num_of_chars_for_completion=1                 " 从第一个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0                                  " 禁止缓存匹配项，每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1                    " 语法关键字补全
+
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F4> :YcmDiags<CR>
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 nnoremap <Leader>fl :NERDTreeToggle<CR>
 let NERDTreeWinSize=32
@@ -148,10 +150,10 @@ Bundle 'gmarik/vundle'
 Bundle 'a.vim'
 Bundle 'vimcdoc'
 Bundle 'STL-improved'
-Bundle 'OmniCppComplete'
+" Bundle 'OmniCppComplete'
 Bundle 'The-NERD-Commenter'
 
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'bling/vim-airline'
