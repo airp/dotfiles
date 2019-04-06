@@ -137,6 +137,8 @@ let g:tagbar_width=32
 let g:tagbar_compact=1
 "autocmd BufReadPost *.h,*.c,*.cpp,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
+" 关闭YCM的显示诊断信息的功能 (暂时未找到C++14语法检测的支持)
+"let g:ycm_show_diagnostics_ui = 0
 
 " Vundle Start
 filetype off                  " required!
@@ -160,6 +162,8 @@ Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'ianva/vim-youdao-translater'
+Bundle 'mileszs/ack.vim'
+Bundle 'christoomey/vim-system-copy'
 "Bundle 'TimothyYe/vim-tips'                    " Need ruby enviroument
 "Bundle 'uguu-org/vim-matrix-screensaver'
 
