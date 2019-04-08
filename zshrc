@@ -104,7 +104,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden --follow -g "!{.
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d . --color=never"
-#export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
 
 # fzf <C-r> unique history
 setopt HIST_IGNORE_ALL_DUPS
