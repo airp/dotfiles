@@ -37,7 +37,7 @@ noremap <leader>yd :Yde<CR>
 
 set pastetoggle=<f5>
 
-cnoremap <C-p> <Up>
+"cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 nnoremap <silent> [b :bprevious<CR>
@@ -137,8 +137,29 @@ let g:tagbar_width=32
 let g:tagbar_compact=1
 "autocmd BufReadPost *.h,*.c,*.cpp,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
-" 关闭YCM的显示诊断信息的功能 (暂时未找到C++14语法检测的支持)
+" YCM的显示诊断信息的功能 1:开, 0:关 (暂时未找到C++14语法检测的支持)
 "let g:ycm_show_diagnostics_ui = 0
+
+" fzf快捷键配置
+nmap <C-p> :Files<CR>
+nmap <C-e> :Buffers<CR>
+let g:fzf_action = { 'ctrl-e': 'edit' }
+
+" 在vim中, 重新设定fzf的文件搜索规则与预览样式
+let $FZF_DEFAULT_COMMAND = 'rg --files --ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+let $FZF_DEFAULT_OPTS = '--layout=reverse'
+
+" Files命令搜索结果带有预览窗口
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" 自定义fzf全文搜索, ripgrep配置
+let g:rg_command = '
+  \ rg --column --line-number --no-heading --ignore --no-fixed-strings --smart-case --hidden --follow --color "always"
+  \ -g "!.{log,log.*}"
+  \ -g "!{.git,node_modules,vendor}/*" '
+
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " Vundle Start
 filetype off                  " required!
@@ -164,6 +185,8 @@ Bundle 'majutsushi/tagbar'
 Bundle 'ianva/vim-youdao-translater'
 Bundle 'mileszs/ack.vim'
 Bundle 'christoomey/vim-system-copy'
+Bundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Bundle 'junegunn/fzf.vim'
 "Bundle 'TimothyYe/vim-tips'                    " Need ruby enviroument
 "Bundle 'uguu-org/vim-matrix-screensaver'
 
