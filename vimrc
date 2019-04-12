@@ -1,17 +1,16 @@
 set nocompatible
-filetype plugin on
+"filetype plugin on
 
-syntax enable           " 开启语法高亮功能
+"syntax enable           " 开启语法高亮功能
 syntax on               " 允许用指定语法高亮配色方案替换默认方案
 
 if has("gui_running")
     set background=dark
     colorscheme solarized
 else
-    "set background=dark
-    "let g:solarized_termcolors=256
-    "let g:solarized_termtrans = 1
-    "colorscheme solarized
+    " 使vim在tmux中显示的颜色与在外部显示的一致
+    " 如果仍然有问题, 强制tmux使用256色, 使用tmux -2启动
+    set background=dark
     set t_Co=256
 endif
 
@@ -37,13 +36,8 @@ noremap <leader>yd :Yde<CR>
 
 set pastetoggle=<f5>
 
-"cnoremap <C-p> <Up>
+cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
 
 " 暂时屏蔽左右移动, 练习单词间跳转以及f, t命令
 noremap l <Nop>
@@ -51,7 +45,7 @@ noremap h <Nop>
 
 " nnoremap <F4> :!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" > src.files | ctags -R --c++-kinds=+px --fields=+iaS --extra=+q -L src.files<CR><CR>
 
-" 在原有基础之上增加暂时关闭查找高亮的功能
+" 在<C-l>原有基础上增加临时关闭查找高亮的功能
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " &本身会忽略标志位, 重定义普通模式下的&含义
@@ -63,7 +57,6 @@ xnoremap & :&&<CR>
 "set incsearch
 "set spell
 "cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
-
 
 " 可视模式下*/#, 根据选中内容查询
 xnoremap * :<C-u>call <SID>VSetSearch() <CR>/<C-R>=@/<CR><CR>
@@ -92,27 +85,7 @@ let g:airline#extensions#whitespace#symbol = '!'
 "nnoremap <C-n> :bn<CR>
 "nnoremap <C-p> :bp<CR>
 
-
-" ctags 索引文件
-set tags+=tags;,~/ctags/tags/cpp
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1 
-let OmniCpp_ShowPrototypeInAbbr = 1 " 显示函数参数列表
-let OmniCpp_MayCompleteDot = 1   " 输入 .  后自动补全
-let OmniCpp_MayCompleteArrow = 1 " 输入 -> 后自动补全
-let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-
-" 自动关闭补全窗口 
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest
-
-" 补全窗口配色
-"highlight Pmenu    guibg=darkgrey  guifg=black
-"highlight PmenuSel guibg=lightgrey guifg=black
-
-
+" ycm相关配置
 let g:ycm_complete_in_comments=1                            " 补全功能在注释中同样有效
 let g:ycm_confirm_extra_conf=0                              " 允许vim加载.ycm_extra_conf.py文件,不再提示
 let g:ycm_collect_identifiers_from_tags_files=1             " 开启 YCM 标签补全引擎
@@ -121,24 +94,23 @@ set completeopt-=preview                                    " 补全内容不以
 let g:ycm_min_num_of_chars_for_completion=1                 " 从第一个键入字符就开始罗列匹配项
 let g:ycm_cache_omnifunc=0                                  " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_seed_identifiers_with_syntax=1                    " 语法关键字补全
-
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <F4> :YcmDiags<CR>
+let g:ycm_show_diagnostics_ui = 1                           " YCM 显示诊断信息的功能
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
-nnoremap <Leader>fl :NERDTreeToggle<CR>
+" 有道翻译
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F4> :YcmDiags<CR>
+
+nnoremap <leader>fl :NERDTreeToggle<CR>
 let NERDTreeWinSize=32
 "let NERDTreeShowHidden=1                    " 显示隐藏文件
 let NERDTreeMinimalUI=1                     " NERDTree 子窗口中不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1              " 删除文件时自动删除文件对应 buffer
 
-nnoremap <leader>tl :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_width=32
 let g:tagbar_compact=1
 "autocmd BufReadPost *.h,*.c,*.cpp,*.hpp,*.cc,*.cxx call tagbar#autoopen()
-
-" YCM的显示诊断信息的功能 1:开, 0:关 (暂时未找到C++14语法检测的支持)
-"let g:ycm_show_diagnostics_ui = 0
 
 " fzf快捷键配置
 nmap <C-p> :Files<CR>
@@ -161,6 +133,18 @@ let g:rg_command = '
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
+" indentline 开启了vim的conceal功能. 例如,会自动隐藏json的双引号. 视影响程度决定是否要关闭该功能
+" indentline 层级样式
+"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" UltiSnips 配置
+let g:UltiSnipsExpandTrigger='<CR>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+let g:UltiSnipsEditSplit="vertical"
+" 指定UltiSnips的搜索路径
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.UltiSnips', 'UltiSnips']
+
 " Vundle Start
 filetype off                  " required!
 
@@ -173,20 +157,23 @@ Bundle 'gmarik/vundle'
 Bundle 'a.vim'
 Bundle 'vimcdoc'
 Bundle 'STL-improved'
-" Bundle 'OmniCppComplete'
-Bundle 'The-NERD-Commenter'
-
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-airline/vim-airline-themes'
 Bundle 'bling/vim-airline'
-Bundle 'scrooloose/nerdtree'
+Bundle 'vim-airline/vim-airline-themes'
+Bundle 'flazz/vim-colorschemes'
 Bundle 'majutsushi/tagbar'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
 Bundle 'ianva/vim-youdao-translater'
-Bundle 'mileszs/ack.vim'
 Bundle 'christoomey/vim-system-copy'
 Bundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Bundle 'junegunn/fzf.vim'
+Bundle 'easymotion/vim-easymotion'
+Bundle 'sirver/ultisnips'
+Bundle 'honza/vim-snippets'
+Bundle 'yggdroot/indentline'
+"Bundle 'airblade/vim-gitgutter'
+"Bundle 'christoomey/vim-tmux-navigator'
 "Bundle 'TimothyYe/vim-tips'                    " Need ruby enviroument
 "Bundle 'uguu-org/vim-matrix-screensaver'
 

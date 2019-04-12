@@ -177,7 +177,7 @@ c() {
 }
 
 # Fuzzy project bookmarks
-cdg() {
+q() {
     local dest_dir=$(cdscuts_glob_echo | fzf)
     if [[ $dest_dir != '' ]]; then
         cd $dest_dir
@@ -185,7 +185,7 @@ cdg() {
 }
 
 # add new bookmarks
-cdg-add () {
+q-add () {
     local curr_dir="${PWD} # $*"
     if ! grep -Fxq "$curr_dir" ~/.cdg_paths; then
         echo "$curr_dir" >> ~/.cdg_paths
