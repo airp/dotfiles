@@ -62,9 +62,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,9 +83,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -96,7 +91,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# autojump config
 [[ -s /home/airp/.autojump/etc/profile.d/autojump.sh ]] && source /home/airp/.autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u
 
 # fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -192,8 +191,8 @@ q-add () {
     fi
 }
 
-source ~/.fzf/shell/zsh-interactive-cd.plugin.zsh
-
 # fuck command
 eval $(thefuck --alias)
+
+#source ~/.fzf/shell/zsh-interactive-cd.plugin.zsh
 

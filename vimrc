@@ -16,6 +16,7 @@ endif
 
 set history=500
 set number
+set rnu
 set ruler
 set hlsearch
 set ignorecase
