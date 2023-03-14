@@ -2,17 +2,17 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/airp/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -23,11 +23,16 @@ ZSH_THEME="robbyrussell"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -39,6 +44,9 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -58,8 +66,8 @@ ZSH_THEME="robbyrussell"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
@@ -92,20 +100,18 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# autojump config
-[[ -s /home/airp/.autojump/etc/profile.d/autojump.sh ]] && source /home/airp/.autojump/etc/profile.d/autojump.sh
+#alias vim="/usr/local/vim9/bin/vim"
 
-autoload -U compinit && compinit -u
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # fzf config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d . --color=never"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
 
-# fzf <C-r> unique history
+# zsh unique history
 setopt HIST_IGNORE_ALL_DUPS
 
 # create new tmux session, or switch to existing one
@@ -145,15 +151,6 @@ ftpane() {
   fi
 }
 
-# like normal autojump when used with arguments but displays an fzf prompt when used without
-j() {
-    if [[ "$#" -ne 0 ]]; then
-        cd $(autojump $@)
-        return
-    fi
-    cd "$(autojump -s | sed '/_____/Q; s/^[0-9,.:]*\s*//' |  fzf --height 40% --reverse --inline-info)" 
-}
-
 # Google Chrome (OS X/linux) Browsing history
 c() {
   local cols sep google_history open
@@ -191,8 +188,29 @@ q-add () {
     fi
 }
 
-# fuck command
-eval $(thefuck --alias)
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+fo() {
+    IFS=$'\n' out=("$(fzf --preview 'cat {}' --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+    key=$(head -1 <<< "$out")
+    file=$(head -2 <<< "$out" | tail -1)
+    if [ -n "$file" ]; then
+        [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+    fi
+}
 
-#source ~/.fzf/shell/zsh-interactive-cd.plugin.zsh
+# cd to selected directory
+fd() {
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune \
+        -o -type d -print 2> /dev/null | fzf +m) &&
+        cd "$dir"
+}
+
+#find-in-file - usage: fif <searchTerm>
+fif() {
+    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for !"; return 1; fi
+    rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
 
