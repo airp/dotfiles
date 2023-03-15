@@ -28,6 +28,11 @@ set sw=4
 set sts=4
 set expandtab
 
+" 当前项目环境编码异常, 需要添加以下3项
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=utf-8
+set encoding=utf8
+
 nnoremap <silent> <C-T> <Esc>:Ydc<CR> 
 vnoremap <silent> <C-T> <Esc>:Ydv<CR> 
 noremap <leader>yd :Yde<CR>
