@@ -140,7 +140,7 @@ let g:rg_command = '
   \ -g "!.{log,log.*}"
   \ -g "!{.git,node_modules,vendor}/*" '
 
-command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* S call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " indentline 开启了vim的conceal功能. 例如,会自动隐藏json的双引号. 视影响程度决定是否要关闭该功能
 " indentline 层级样式
