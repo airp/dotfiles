@@ -1,24 +1,22 @@
 Ctrl + t, 使用fzf查找当前目录(文件查找)
-fo, 查找当前目录下所有文件, Ctrl + e, Ctrl + o.(文件查找)
+p, 查找当前目录下所有文件, Ctrl + e, Ctrl + o.(文件查找)
 
-fd, 查找当前目录下的所有目录(目录查找)
+c, 查找当前目录下的所有目录(目录查找)
+Alt + c, 使用fd命令查找目录
 q, 查找预设的书签(目录查找)
 q-add, 添加当前目录到书签
 
-fif <searchTerm>, 搜索包含关键字的文件,打印路径(全文搜索)
+F <searchTerm>, 搜索包含关键字的文件,打印路径(全文搜索)
 
-
-c, 浏览器搜索历史查找
+lc, 浏览器搜索历史查找
 
 Ctrl + r, 历史命令查找
 
-Alt + c, fd命令.(冲突)
 
 
 tm, 创建tmux Session or 切换tmux Session(一个终端只有一个Session)
 fs, 切换tmux Session
 ftpane, 跳转当前Session某一分屏
-
 
 
 

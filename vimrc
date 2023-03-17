@@ -33,6 +33,9 @@ set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set encoding=utf8
 
+"let mapleader=" "
+
+" 有道翻译
 nnoremap <silent> <C-T> <Esc>:Ydc<CR> 
 vnoremap <silent> <C-T> <Esc>:Ydv<CR> 
 noremap <leader>yd :Yde<CR>
@@ -46,8 +49,8 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 " 暂时屏蔽左右移动, 练习单词间跳转以及f, t命令
-noremap l <Nop>
-noremap h <Nop>
+"noremap l <Nop>
+"noremap h <Nop>
 
 " nnoremap <F4> :!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" > src.files | ctags -R --c++-kinds=+px --fields=+iaS --extra=+q -L src.files<CR><CR>
 
@@ -100,10 +103,10 @@ set completeopt-=preview                                    " 补全内容不以
 let g:ycm_min_num_of_chars_for_completion=1                 " 从第一个键入字符就开始罗列匹配项
 let g:ycm_cache_omnifunc=0                                  " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_seed_identifiers_with_syntax=1                    " 语法关键字补全
-let g:ycm_show_diagnostics_ui = 1                           " YCM 显示诊断信息的功能
+let g:ycm_show_diagnostics_ui=1                             " YCM 显示诊断信息的功能
+"let g:ycm_max_diagnostics_to_display=0
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
-" 有道翻译
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F4> :YcmDiags<CR>
 
