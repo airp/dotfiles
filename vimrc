@@ -33,12 +33,12 @@ set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set encoding=utf8
 
-"let mapleader=" "
+let mapleader=" "
 
 " 有道翻译
-nnoremap <silent> <C-T> <Esc>:Ydc<CR> 
-vnoremap <silent> <C-T> <Esc>:Ydv<CR> 
-noremap <leader>yd :Yde<CR>
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>
 
 "set autochdir
 "set suffixesadd+=.h
@@ -51,6 +51,17 @@ cnoremap <C-n> <Down>
 " 暂时屏蔽左右移动, 练习单词间跳转以及f, t命令
 "noremap l <Nop>
 "noremap h <Nop>
+"noremap j <Nop>
+"noremap k <Nop>
+
+
+map <leader>h <Plug>(easymotion-linebackward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <leader>l <Plug>(easymotion-lineforward)
+map <Leader>w <Plug>(easymotion-w)
+map <Leader>b <Plug>(easymotion-b)
+map <Leader>s <Plug>(easymotion-s)
 
 " nnoremap <F4> :!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" > src.files | ctags -R --c++-kinds=+px --fields=+iaS --extra=+q -L src.files<CR><CR>
 
@@ -107,7 +118,8 @@ let g:ycm_show_diagnostics_ui=1                             " YCM 显示诊断�
 "let g:ycm_max_diagnostics_to_display=0
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>i :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>u :YcmCompleter GoToDeclaration<CR>
 nnoremap <F4> :YcmDiags<CR>
 
 nnoremap <leader>fl :NERDTreeToggle<CR>
@@ -140,7 +152,7 @@ let g:rg_command = '
   \ -g "!.{log,log.*}"
   \ -g "!{.git,node_modules,vendor}/*" '
 
-command! -bang -nargs=* S call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " indentline 开启了vim的conceal功能. 例如,会自动隐藏json的双引号. 视影响程度决定是否要关闭该功能
 " indentline 层级样式
