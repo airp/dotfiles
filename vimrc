@@ -208,6 +208,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'luochen1990/rainbow'
 
 Plugin 'ianva/vim-youdao-translater'
 Plugin 'yggdroot/indentline'

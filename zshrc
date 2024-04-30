@@ -100,7 +100,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#alias vim="/usr/local/vim9/bin/vim"
+alias vi=nvim
+alias vim=nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -213,6 +214,4 @@ F() {
     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for !"; return 1; fi
     rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
-
-eval "$(thefuck --alias)"
 
