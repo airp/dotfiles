@@ -71,6 +71,7 @@ map("n", "<leader>q", ":qa!<CR>", opt)
 ------------------------------------------------------------------
 -- 取消 s 默认功能
 map("n", "s", "", opt)
+map("n", "ss", "s", opt)
 map("n", "sv", ":vsp<CR>", opt)
 map("n", "sh", ":sp<CR>", opt)
 -- 关闭当前
@@ -157,11 +158,14 @@ map("n", "<leader>m", ":NvimTreeToggle<CR>", opt)
 
 -- bufferline
 -- 左右Tab切换
-map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
+--map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
+--map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<A-,>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<A-.>", ":BufferLineCycleNext<CR>", opt)
 -- "moll/vim-bbye" 关闭当前 buffer
 map("n", "<leader>bc", ":Bdelete!<CR>", opt)
-map("n", "<C-w>", ":Bdelete!<CR>", opt)
+--map("n", "<C-w>", ":Bdelete!<CR>", opt)
+map("n", "<A-d>", ":Bdelete!<CR>", opt)
 -- 关闭左/右侧标签页
 map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
 map("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)

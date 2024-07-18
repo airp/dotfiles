@@ -11,8 +11,12 @@ local lspconfig = require("lspconfig")
 -- https://github.com/williamboman/nvim-lsp-installer#available-lsps
 local servers = {
   -- lua_ls = require("lsp.config.lua"), -- lua/lsp/config/lua.lua
+  html = require("lsp.config.html"),
+  cssls = require("lsp.config.css"),
+  tsserver = require("lsp.config.typescript"),
   clangd = require("lsp.config.clangd"),
   pyright = require("lsp.config.pyright"),
+  gopls = require("lsp.config.go"),
   remark_ls = require("lsp.config.markdown"),
 }
 
