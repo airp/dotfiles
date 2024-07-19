@@ -79,10 +79,10 @@ map("n", "sc", "<C-w>c", opt)
 -- 关闭其他
 map("n", "so", "<C-w>o", opt) -- close others
 -- alt + hjkl  窗口之间跳转
-map("n", "<A-h>", "<C-w>h", opt)
+map("n", "<C-h>", "<C-w>h", opt)
 map("n", "<A-j>", "<C-w>j", opt)
 map("n", "<A-k>", "<C-w>k", opt)
-map("n", "<A-l>", "<C-w>l", opt)
+map("n", "<C-l>", "<C-w>l", opt)
 -- <leader> + hjkl 窗口之间跳转
 map("n", "<leader>h", "<C-w>h", opt)
 map("n", "<leader>j", "<C-w>j", opt)
@@ -160,8 +160,8 @@ map("n", "<leader>m", ":NvimTreeToggle<CR>", opt)
 -- 左右Tab切换
 --map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
 --map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
-map("n", "<A-,>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<A-.>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt)
 -- "moll/vim-bbye" 关闭当前 buffer
 map("n", "<leader>bc", ":Bdelete!<CR>", opt)
 --map("n", "<C-w>", ":Bdelete!<CR>", opt)
