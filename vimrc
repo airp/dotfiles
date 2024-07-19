@@ -173,21 +173,21 @@ nmap <C-e> :Buffers<CR>
 
 " python3 install.py --clangd-completer
 " YouCompleteMe
-let g:ycm_complete_in_comments=1                        " 补全功能在注释中同样有效
-let g:ycm_confirm_extra_conf=0                          " 允许vim加载.ycm_extra_conf.py文件,不再提示
-let g:ycm_collect_identifiers_from_tags_files=1         " 开启 YCM 标签补全引擎
-"set tags+=~/ctags/tags/cpp                              " 引入 C++ 标准库tags
-set completeopt-=preview                                " 补全内容不以分割子窗口形式出现，只显示补全列表
-let g:ycm_min_num_of_chars_for_completion=1             " 从第一个键入字符就开始罗列匹配项
-let g:ycm_cache_omnifunc=0                              " 禁止缓存匹配项，每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1                " 语法关键字补全
-let g:ycm_show_diagnostics_ui=1                         " YCM 显示诊断信息的功能
-"let g:ycm_max_diagnostics_to_display=0
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+"let g:ycm_complete_in_comments=1                        " 补全功能在注释中同样有效
+"let g:ycm_confirm_extra_conf=0                          " 允许vim加载.ycm_extra_conf.py文件,不再提示
+"let g:ycm_collect_identifiers_from_tags_files=1         " 开启 YCM 标签补全引擎
+""set tags+=~/ctags/tags/cpp                              " 引入 C++ 标准库tags
+"set completeopt-=preview                                " 补全内容不以分割子窗口形式出现，只显示补全列表
+"let g:ycm_min_num_of_chars_for_completion=1             " 从第一个键入字符就开始罗列匹配项
+"let g:ycm_cache_omnifunc=0                              " 禁止缓存匹配项，每次都重新生成匹配项
+"let g:ycm_seed_identifiers_with_syntax=1                " 语法关键字补全
+"let g:ycm_show_diagnostics_ui=1                         " YCM 显示诊断信息的功能
+""let g:ycm_max_diagnostics_to_display=0
+"let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
-nnoremap <leader>i :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>u :YcmCompleter GoToDeclaration<CR>
-nnoremap <F4> :YcmDiags<CR>
+"nnoremap <leader>i :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <leader>u :YcmCompleter GoToDeclaration<CR>
+"nnoremap <F4> :YcmDiags<CR>
 
 
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -219,7 +219,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 "Plugin 'airblade/vim-gitgutter'
 "Plugin 'christoomey/vim-tmux-navigator'
