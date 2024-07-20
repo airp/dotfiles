@@ -9,6 +9,12 @@ map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+map("n", "<C-h>", "")
+map("n", "<C-l>", "<cmd>noh<CR>", { desc = "general clear highlights" })
+
+-- nvimtree
+map("n", "<A-m>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+
 map("n", "<A-w>", function()
   require("nvchad.tabufline").close_buffer()
 end, { desc = "buffer close" })
@@ -16,9 +22,6 @@ end, { desc = "buffer close" })
 map({ "n", "t" }, "<A-s>", function()
   require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
 end, { desc = "terminal new horizontal term" })
-
-map("n", "<C-h>", "")
-map("n", "<C-l>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
 -- 上下滚动浏览
 map("n", "<C-j>", "5j")
