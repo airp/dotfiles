@@ -66,6 +66,3 @@ map("n", "<A-q>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" }
 -- telescope
 map("n", "<C-f>", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
-
-map("i", "<C-j>", "move_selection_next")
-map("i", "<C-k>", "move_selection_previous")
