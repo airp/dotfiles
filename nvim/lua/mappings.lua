@@ -17,6 +17,17 @@ map("n", "<leader>gif", "<cmd>GoIfErr<CR>")
 map("n", "<C-h>", "")
 map("n", "<C-l>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
+-- exit
+map("n", "<A-q>", ":q!<CR>")
+
+-- buffer close
+map("n", "<A-w>", function()
+  require("nvchad.tabufline").close_buffer()
+end, { desc = "buffer close" })
+
+-- nvimtree
+map("n", "<A-e>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+
 -- 上下滚动浏览
 map("n", "<C-j>", "5j")
 map("n", "<C-k>", "5k")
@@ -45,11 +56,6 @@ map("n", "<A-j>", "<C-w>j")
 map("n", "<A-k>", "<C-w>k")
 map("n", "<A-l>", "<C-w>l")
 
--- buffer close
-map("n", "<A-w>", function()
-  require("nvchad.tabufline").close_buffer()
-end, { desc = "buffer close" })
-
 -- Terminal相关
 map("t", "<Esc>", "<C-\\><C-n>")
 map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]])
@@ -59,9 +65,6 @@ map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]])
 map({ "n", "t" }, "<A-s>", function()
   require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
 end, { desc = "terminal new horizontal term" })
-
--- nvimtree
-map("n", "<A-q>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
 -- telescope
 map("n", "<C-f>", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
