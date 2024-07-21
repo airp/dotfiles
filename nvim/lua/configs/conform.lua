@@ -4,6 +4,7 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     go = { "goimports", "gofumpt", "golines" },
+    python = { "black", "isort" },
   },
 
   format_on_save = {

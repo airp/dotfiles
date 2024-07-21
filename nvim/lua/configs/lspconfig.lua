@@ -23,10 +23,11 @@ lspconfig.tsserver.setup {
 }
 
 -- python
-lspconfig.pyright.setup {
+lspconfig.basedpyright.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+  cmd = { "basedpyright" },
 }
 
 -- go
