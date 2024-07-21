@@ -9,19 +9,13 @@ map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+-- go
+map("n", "<leader>gaj", "<cmd>GoTagAdd json<CR>")
+map("n", "<leader>gif", "<cmd>GoIfErr<CR>")
+
+-- basic
 map("n", "<C-h>", "")
 map("n", "<C-l>", "<cmd>noh<CR>", { desc = "general clear highlights" })
-
--- nvimtree
-map("n", "<A-m>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-
-map("n", "<A-w>", function()
-  require("nvchad.tabufline").close_buffer()
-end, { desc = "buffer close" })
-
-map({ "n", "t" }, "<A-s>", function()
-  require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
-end, { desc = "terminal new horizontal term" })
 
 -- 上下滚动浏览
 map("n", "<C-j>", "5j")
@@ -51,9 +45,27 @@ map("n", "<A-j>", "<C-w>j")
 map("n", "<A-k>", "<C-w>k")
 map("n", "<A-l>", "<C-w>l")
 
+-- buffer close
+map("n", "<A-w>", function()
+  require("nvchad.tabufline").close_buffer()
+end, { desc = "buffer close" })
+
 -- Terminal相关
 map("t", "<Esc>", "<C-\\><C-n>")
 map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]])
 map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]])
 map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]])
 map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]])
+map({ "n", "t" }, "<A-s>", function()
+  require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
+end, { desc = "terminal new horizontal term" })
+
+-- nvimtree
+map("n", "<A-q>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+
+-- telescope
+map("n", "<C-f>", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
+
+map("i", "<C-j>", "move_selection_next")
+map("i", "<C-k>", "move_selection_previous")
