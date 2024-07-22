@@ -5,7 +5,7 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+map("i", "<A-q>", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
@@ -68,4 +68,4 @@ end, { desc = "terminal new horizontal term" })
 
 -- telescope
 map("n", "<C-f>", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
-map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
+map("n", "<C-p>", "<cmd>Telescope find_files<CR>", { desc = "telescope find files" })

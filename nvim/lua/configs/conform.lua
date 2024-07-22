@@ -6,6 +6,7 @@ local options = {
     -- go = { "goimports", "gofumpt", "golines" },
     go = { "goimports", "gofmt" },
     python = { "black", "isort" },
+    --python = { "mypy", "ruff" },
   },
 
   format_on_save = {
