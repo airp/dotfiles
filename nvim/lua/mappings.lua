@@ -18,7 +18,7 @@ map("n", "<C-h>", "")
 map("n", "<C-l>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
 -- exit
-map("n", "<A-q>", ":q!<CR>")
+map("n", "<A-q>", ":q<CR>")
 
 -- buffer close
 map("n", "<A-w>", function()
@@ -57,7 +57,7 @@ map("n", "<A-k>", "<C-w>k")
 map("n", "<A-l>", "<C-w>l")
 
 -- Terminal相关
-map("t", "<Esc>", "<C-\\><C-n>")
+map("t", "<A-q>", "<C-\\><C-n>")
 map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]])
 map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]])
 map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]])
