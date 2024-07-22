@@ -3,7 +3,8 @@ local options = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
-    go = { "goimports", "gofumpt", "golines" },
+    -- go = { "goimports", "gofumpt", "golines" },
+    go = { "goimports", "gofmt" },
     python = { "black", "isort" },
   },
 
