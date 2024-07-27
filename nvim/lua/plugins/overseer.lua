@@ -8,7 +8,7 @@ return {
     local overseer = require "overseer"
     overseer.setup {
       dap = false,
-      templates = { "make", "cargo", "shell", "user.run_python", "user.run_script" },
+      templates = { "make", "cargo", "shell", "user.run_script", "user.run_python", "user.cpp_build" },
       task_list = {
         direction = "left",
         bindings = {

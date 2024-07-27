@@ -1,5 +1,5 @@
 return {
-  name = "python script",
+  name = "run python",
   params = {
     cmd = { optional = true, type = "string", default = "python3" },
     cwd = { optional = true, type = "string" },

@@ -1,5 +1,5 @@
 return {
-  name = "script",
+  name = "run script",
   condition = {
     filetype = { "sh", "python" },
   },
@@ -13,6 +13,7 @@ return {
       cwd = vim.fn.expand "%:p:h",
       args = vim.list_extend({ vim.fn.expand "%:p" }, params.args),
       components = {
+        { "on_output_quickfix", set_diagnostics = true },
         "display_duration",
         "on_exit_set_status",
         "on_complete_notify",
