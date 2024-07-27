@@ -45,8 +45,8 @@ return {
         -- second key is the lefthand side of the map
 
         -- navigate buffer tabs
-        ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
-        ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
+        ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
@@ -64,6 +64,13 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+
+        -- ["<C-f>"] = "<cmd>Telescope live_grep<CR>",
+        -- ["<C-p>"] = "<cmd>Telescope find_files<CR>",
+      },
+      i = {
+        ["<C-b>"] = "<ESC>^i",
+        ["<C-e>"] = "<End>",
       },
     },
   },
