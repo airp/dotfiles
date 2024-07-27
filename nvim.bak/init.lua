@@ -1,27 +1,40 @@
--- 基础配置
-require("basic")
--- 快捷键映射
-require("keybindings")
--- Packer插件管理
-require("plugins")
--- 主题设置
-require("colorscheme")
--- 自动命令
-require("autocmds")
--- 插件配置
-require("plugin-config.nvim-tree")
-require("plugin-config.bufferline")
-require("plugin-config.lualine")
-require("plugin-config.telescope")
-require("plugin-config.dashboard")
-require("plugin-config.project")
-require("plugin-config.nvim-treesitter")
--- 内置LSP
-require("lsp.setup")
-require("lsp.cmp")
-require("lsp.ui")
--- 格式化
--- require("lsp.null-ls")
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.mapleader = " "
 
--- 加一句打印可以定住警告信息(前提有警告)
--- print("Hello World!")
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+if not vim.loop.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+local lazy_config = require "configs.lazy"
+
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+    config = function()
+      require "options"
+    end,
+  },
+
+  { import = "plugins" },
+}, lazy_config)
+
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "nvchad.autocmds"
+require "autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)

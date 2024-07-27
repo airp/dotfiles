@@ -1,55 +1,21 @@
-local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", {
-  clear = true,
-})
-
-local autocmd = vim.api.nvim_create_autocmd
-
--- nvim-tree 自动关闭
-autocmd("BufEnter", {
-  nested = true,
-  group = myAutoGroup,
+vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
   callback = function()
-    if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
-      vim.cmd("quit")
+    for i = 1, 9, 1 do
+      if i <= #vim.t.bufs then
+        vim.keymap.set("n", string.format("<A-%s>", i), function()
+          vim.api.nvim_set_current_buf(vim.t.bufs[i])
+        end)
+      else
+        vim.keymap.set("n", string.format("<A-%s>", i), function() end)
+      end
     end
   end,
 })
 
--- 进入Terminal 自动进入插入模式
-autocmd("TermOpen", {
-  group = myAutoGroup,
-  command = "startinsert",
-})
-
--- 修改lua/plugins.lua 自动更新插件
-autocmd("BufWritePost", {
-  group = myAutoGroup,
-  -- autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  callback = function()
-    if vim.fn.expand("<afile>") == "lua/plugins.lua" then
-      vim.api.nvim_command("source lua/plugins.lua")
-      vim.api.nvim_command("PackerSync")
-    end
-  end,
-})
-
--- Highlight on yank
-autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = myAutoGroup,
-  pattern = "*",
-})
-
--- 用o换行不要延续注释
-autocmd("BufEnter", {
-  group = myAutoGroup,
-  pattern = "*",
-  callback = function()
-    vim.opt.formatoptions = vim.opt.formatoptions
-      - "o" -- O and o, don't continue comments
-      + "r" -- But do continue when pressing enter.
-  end,
-})
-
+-- vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
+--   callback = function()
+--     vim.t.bufs = vim.tbl_filter(function(bufnr)
+--       return vim.api.nvim_buf_get_option(bufnr, "modified")
+--     end, vim.t.bufs)
+--   end,
+-- })
