@@ -5,7 +5,11 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.colorscheme.catppuccin" },
+  { import = "astrocommunity.recipes.telescope-nvchad-theme" },
+  { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.go" },
+  { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.cpp" },
   -- import/override with your plugins folder
 }
