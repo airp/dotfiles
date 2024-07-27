@@ -12,8 +12,6 @@ return {
       "css",
       "json",
       "sql",
-      "go",
-      "cpp",
     },
   },
 }

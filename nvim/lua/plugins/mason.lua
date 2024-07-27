@@ -10,10 +10,6 @@ return {
       ensure_installed = {
         "lua_ls",
         -- add more arguments for adding more language servers
-        "bashls",
-        "gopls",
-        "pyright",
-        "clangd",
       },
     },
   },
@@ -25,10 +21,6 @@ return {
       ensure_installed = {
         "stylua",
         -- add more arguments for adding more null-ls sources
-        "goimports",
-        "gofmt",
-        "black",
-        "isort",
       },
     },
   },
