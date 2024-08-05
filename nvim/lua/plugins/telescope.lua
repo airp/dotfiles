@@ -17,6 +17,8 @@ return {
       file_ignore_patterns = {
         "logs",
         "%.log",
+        "%.pb.go",
+        "%.pb.%.go",
         -- "%.md",
         -- "%.json",
       },
