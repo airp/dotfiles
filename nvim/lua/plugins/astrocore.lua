@@ -58,6 +58,7 @@ return {
           end,
           desc = "Close buffer from tabline",
         },
+        -- ["<C-c>"] = { function() require("astrocore.buffer").close() end, desc = "Close buffer" },
 
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus

@@ -54,7 +54,8 @@ return {
             analysis = {
               typeCheckingMode = "basic",
               autoImportCompletions = true,
-              stubPath = vim.env.HOME .. "/typings",
+              -- stubPath = vim.env.HOME .. "/typings",
+              stubPath = "",
               diagnosticSeverityOverrides = {
                 reportUnusedImport = "information",
                 reportUnusedFunction = "information",
