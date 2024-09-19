@@ -43,29 +43,13 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
-      basedpyright = {
-        before_init = function(_, c)
-          if not c.settings then c.settings = {} end
-          if not c.settings.python then c.settings.python = {} end
-          c.settings.python.pythonPath = vim.fn.exepath "python"
-        end,
+      gopls = {
         settings = {
-          basedpyright = {
-            analysis = {
-              typeCheckingMode = "basic",
-              autoImportCompletions = true,
-              -- stubPath = vim.env.HOME .. "/typings",
-              stubPath = "",
-              diagnosticSeverityOverrides = {
-                reportUnusedImport = "information",
-                reportUnusedFunction = "information",
-                reportUnusedVariable = "information",
-                reportGeneralTypeIssues = "none",
-                reportOptionalMemberAccess = "none",
-                reportOptionalSubscript = "none",
-                reportPrivateImportUsage = "none",
-              },
+          gopls = {
+            analyses = {
+              deprecated = false,
             },
+            gofumpt = false,
           },
         },
       },
