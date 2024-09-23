@@ -47,6 +47,7 @@ return {
         settings = {
           gopls = {
             analyses = {
+              ST1003 = false,
               deprecated = false,
             },
             gofumpt = false,

@@ -8,6 +8,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.recipes.telescope-nvchad-theme" },
+  { import = "astrocommunity.recipes.astrolsp-no-insert-inlay-hints" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.python" },

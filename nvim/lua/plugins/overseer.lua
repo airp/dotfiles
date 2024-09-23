@@ -1,8 +1,8 @@
 return {
   "stevearc/overseer.nvim",
   init = function()
-    vim.keymap.set("n", "<Leader>ot", "<cmd>OverseerToggle<cr>", { desc = "Toggle overseer task list" })
-    vim.keymap.set("n", "<Leader>or", "<cmd>OverseerRun<cr>", { desc = "List overseer run templates" })
+    vim.keymap.set("n", "<Leader>te", "<cmd>OverseerToggle<cr>", { desc = "Toggle overseer task list" })
+    vim.keymap.set("n", "<Leader>tr", "<cmd>OverseerRun<cr>", { desc = "List overseer run templates" })
   end,
   config = function()
     local overseer = require "overseer"
