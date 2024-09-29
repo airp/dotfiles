@@ -36,6 +36,7 @@ return {
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
+        wordmotion_nomap = true,
       },
     },
     -- Mappings can be configured through AstroCore as well.
@@ -69,6 +70,46 @@ return {
 
         -- ["<C-f>"] = "<cmd>Telescope live_grep<CR>",
         -- ["<C-p>"] = "<cmd>Telescope find_files<CR>",
+
+        -- vim-wordmotion version
+        -- ["W"] = { "w", desc = "Next word" },
+        -- ["B"] = { "b", desc = "Prev word" },
+        -- ["E"] = { "e", desc = "Next end of word" },
+        -- ["gE"] = { "ge", desc = "Prev end of word" },
+        ["W"] = { "<Plug>WordMotion_w", desc = "Next word" },
+        ["B"] = { "<Plug>WordMotion_b", desc = "Prev word" },
+        ["E"] = { "<Plug>WordMotion_e", desc = "Next end of word" },
+        ["gE"] = { "<Plug>WordMotion_ge", desc = "Prev end of word" },
+      },
+      x = {
+        -- vim-wordmotion version
+        -- ["W"] = { "w", desc = "Next word" },
+        -- ["B"] = { "b", desc = "Prev word" },
+        -- ["E"] = { "e", desc = "Next end of word" },
+        -- ["gE"] = { "ge", desc = "Prev end of word" },
+        -- ["iW"] = { "iw", desc = "inner word" },
+        -- ["aW"] = { "aw", desc = "word with ws" },
+        ["W"] = { "<Plug>WordMotion_w", desc = "Next word" },
+        ["B"] = { "<Plug>WordMotion_b", desc = "Prev word" },
+        ["E"] = { "<Plug>WordMotion_e", desc = "Next end of word" },
+        ["gE"] = { "<Plug>WordMotion_ge", desc = "Prev end of word" },
+        ["aW"] = { "<Plug>WordMotion_aw", desc = "word with ws" },
+        ["iW"] = { "<Plug>WordMotion_iw", desc = "inner word" },
+      },
+      o = {
+        -- vim-wordmotion version
+        -- ["W"] = { "w", desc = "Next word" },
+        -- ["B"] = { "b", desc = "Prev word" },
+        -- ["E"] = { "e", desc = "Next end of word" },
+        -- ["gE"] = { "ge", desc = "Prev end of word" },
+        -- ["iW"] = { "iw", desc = "inner word" },
+        -- ["aW"] = { "aw", desc = "word with ws" },
+        ["W"] = { "<Plug>WordMotion_w", desc = "Next word" },
+        ["B"] = { "<Plug>WordMotion_b", desc = "Prev word" },
+        ["E"] = { "<Plug>WordMotion_e", desc = "Next end of word" },
+        ["gE"] = { "<Plug>WordMotion_ge", desc = "Prev end of word" },
+        ["aW"] = { "<Plug>WordMotion_aw", desc = "word with ws" },
+        ["iW"] = { "<Plug>WordMotion_iw", desc = "inner word" },
       },
       i = {
         ["<C-b>"] = "<ESC>^i",

@@ -12,7 +12,8 @@ return {
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.python" },
-  -- { import = "astrocommunity.pack.proto" },
+  { import = "astrocommunity.pack.proto" },
   -- { import = "astrocommunity.pack.cpp" },
+  -- { import = "astrocommunity.pack.vue" },
   -- import/override with your plugins folder
 }
