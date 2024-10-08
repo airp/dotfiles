@@ -10,17 +10,29 @@
 --   end,
 -- })
 
+local actions = require "telescope.actions"
+
 return {
   "nvim-telescope/telescope.nvim",
   opts = {
     defaults = {
+      mappings = {
+        i = {
+          ["<C-q>"] = actions.close,
+          ["<C-x>"] = actions.send_to_qflist + actions.open_qflist,
+        },
+        n = {
+          ["<C-q>"] = actions.close,
+          ["<C-x>"] = actions.send_to_qflist + actions.open_qflist,
+        },
+      },
       file_ignore_patterns = {
-        "logs",
-        "%.log",
-        "%.pb.go",
-        "%.pb.%.go",
-        -- "%.md",
-        -- "%.json",
+        -- "logs/", -- 匹配 logs 目录及其下的所有文件
+        -- ".log", -- 匹配所有路径中包含 .log 的文件
+        "logs/*", -- 匹配 logs 目录下的所有文件
+        "*.log", -- 匹配所有以 .log 结尾的文件
+        ".pb.go",
+        ".pb.*.go",
       },
     },
   },
