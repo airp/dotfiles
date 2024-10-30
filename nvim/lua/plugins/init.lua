@@ -54,4 +54,24 @@ return {
       require "configs.mason-lint"
     end,
   },
+
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = require "configs.flash-opts",
+    keys = require "configs.flash-keys",
+  },
+
+  {
+    "tpope/vim-abolish",
+    event = "VeryLazy",
+    config = function()
+      require "configs.abolish"
+    end,
+  },
+
+  {
+    "chaoren/vim-wordmotion",
+    event = "VeryLazy",
+  },
 }
