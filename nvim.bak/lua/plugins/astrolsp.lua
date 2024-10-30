@@ -54,6 +54,17 @@ return {
           },
         },
       },
+      pyright = {
+        capabilities = {
+          textDocument = {
+            publishDiagnostics = {
+              tagSupport = {
+                valueSet = { 2 },
+              },
+            },
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
