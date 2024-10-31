@@ -9,3 +9,7 @@ local g = vim.g
 
 -- vim-wordmotion
 g.wordmotion_nomap = true
+
+-- vim-tmux-navigator
+g.tmux_navigator_no_wrap = 1
+g.tmux_navigator_disable_when_zoomed = 1

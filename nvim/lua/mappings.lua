@@ -16,3 +16,10 @@ map({ "n", "x", "o" }, "E", "<Plug>WordMotion_e", { desc = "Next end of word" })
 map({ "n", "x", "o" }, "gE", "<Plug>WordMotion_ge", { desc = "Prev end of word" })
 map({ "x", "o" }, "aW", "<Plug>WordMotion_aw", { desc = "word with ws" })
 map({ "x", "o" }, "iW", "<Plug>WordMotion_iw", { desc = "inner word" })
+
+-- vim-tmux-navigator
+map({ "n" }, "<c-h>", ":<C-U>TmuxNavigateLeft<cr>", { noremap = true, silent = true, desc = "" })
+map({ "n" }, "<c-j>", ":<C-U>TmuxNavigateDown<cr>", { noremap = true, silent = true, desc = "" })
+map({ "n" }, "<c-k>", ":<C-U>TmuxNavigateUp<cr>", { noremap = true, silent = true, desc = "" })
+map({ "n" }, "<c-l>", ":<C-U>TmuxNavigateRight<cr>", { noremap = true, silent = true, desc = "" })
+map({ "n" }, "<c-\\>", ":<C-U>TmuxNavigatePrevious<cr>", { noremap = true, silent = true, desc = "" })

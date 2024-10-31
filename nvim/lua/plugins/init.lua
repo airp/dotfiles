@@ -74,4 +74,9 @@ return {
     "chaoren/vim-wordmotion",
     event = "VeryLazy",
   },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
 }
