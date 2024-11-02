@@ -56,18 +56,20 @@ return {
   },
 
   {
+    "nvim-telescope/telescope.nvim",
+    opts = require "configs.telescope",
+  },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
+
+  {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = require "configs.flash-opts",
     keys = require "configs.flash-keys",
-  },
-
-  {
-    "tpope/vim-abolish",
-    event = "VeryLazy",
-    config = function()
-      require "configs.abolish"
-    end,
   },
 
   {
@@ -76,7 +78,10 @@ return {
   },
 
   {
-    "christoomey/vim-tmux-navigator",
-    lazy = false,
+    "tpope/vim-abolish",
+    event = "VeryLazy",
+    config = function()
+      require "configs.abolish"
+    end,
   },
 }
