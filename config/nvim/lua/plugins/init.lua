@@ -66,15 +66,6 @@ return {
   },
 
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    keys = require "configs.flash-keys",
-    config = function()
-      require "configs.flash-opts"
-    end,
-  },
-
-  {
     "chaoren/vim-wordmotion",
     event = "VeryLazy",
   },
@@ -83,7 +74,16 @@ return {
     "tpope/vim-abolish",
     event = "VeryLazy",
     config = function()
+      -- This function is executed after the plugin is loaded.
       require "configs.abolish"
     end,
+  },
+
+  {
+    require "configs.flash",
+  },
+
+  {
+    require "configs.lazygit",
   },
 }
