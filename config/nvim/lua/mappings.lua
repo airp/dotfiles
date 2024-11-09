@@ -23,3 +23,6 @@ map({ "n" }, "<c-j>", ":<C-U>TmuxNavigateDown<cr>", { noremap = true, silent = t
 map({ "n" }, "<c-k>", ":<C-U>TmuxNavigateUp<cr>", { noremap = true, silent = true, desc = "" })
 map({ "n" }, "<c-l>", ":<C-U>TmuxNavigateRight<cr>", { noremap = true, silent = true, desc = "" })
 map({ "n" }, "<c-\\>", ":<C-U>TmuxNavigatePrevious<cr>", { noremap = true, silent = true, desc = "" })
+
+map({ "n" }, "<leader>qq", "<cmd>qa<cr>", { noremap = true, silent = true, desc = "Exit" })
+map({ "n" }, "<leader>q!", "<cmd>qa!<cr>", { noremap = true, silent = true, desc = "Exit !" })

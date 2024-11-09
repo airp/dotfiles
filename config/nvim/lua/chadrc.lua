@@ -12,6 +12,14 @@ M.base46 = {
   --   Comment = { italic = true },
   --   ["@comment"] = { italic = true },
   -- },
+
+  hl_add = {
+    FlashMatch = { fg = "#b4befe", bg = "#1e1e2e" },
+    FlashCurrent = { fg = "#fab387", bg = "#1e1e2e" },
+    FlashLabel = { fg = "#a6e3a1", bg = "#1e1e2e", bold = true },
+    FlashBackdrop = { fg = "#6c7086" },
+    FlashPrompt = { link = "NormalFloat" },
+  },
 }
 
 M.nvdash = {
