@@ -56,6 +56,13 @@ return {
   },
 
   {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require "configs.gitsigns"
+    end,
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     opts = require "configs.telescope",
   },
