@@ -20,10 +20,22 @@ local default_servers = {
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 
+local ooo = function(client, bufnr)
+  -- disable built-in formatter from LSP.
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
+  nvlsp.on_attach(client, bufnr)
+
+  local nomap = vim.keymap.del
+  nomap("n", "<leader>sh", { buffer = bufnr })
+  nomap("n", "<leader>ra", { buffer = bufnr })
+  nomap({ "n", "v" }, "<leader>ca", { buffer = bufnr })
+end
+
 -- lsps with default config
 for _, lsp in ipairs(default_servers) do
   lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
+    on_attach = ooo,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
   }
@@ -37,7 +49,7 @@ end
 -- }
 
 lspconfig.lua_ls.setup {
-  on_attach = nvlsp.on_attach,
+  on_attach = ooo,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
   settings = {
@@ -72,12 +84,7 @@ lspconfig.lua_ls.setup {
 -- }
 
 lspconfig.gopls.setup {
-  on_attach = function(client, bufnr)
-    -- disable built-in formatter from LSP.
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-    nvlsp.on_attach(client, bufnr)
-  end,
+  on_attach = ooo,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
   cmd = { "gopls" },
@@ -96,12 +103,7 @@ lspconfig.gopls.setup {
 }
 
 lspconfig.pyright.setup {
-  on_attach = function(client, bufnr)
-    -- disable built-in formatter from LSP.
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-    nvlsp.on_attach(client, bufnr)
-  end,
+  on_attach = ooo,
   on_init = nvlsp.on_init,
   -- https://github.com/microsoft/pyright/discussions/5852#discussioncomment-6874502
   -- https://www.reddit.com/r/neovim/comments/11k5but/how_to_disable_pyright_diagnostics/

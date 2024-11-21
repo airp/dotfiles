@@ -3,14 +3,25 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
-local unmap = vim.keymap.del
-local autocmd = vim.api.nvim_create_autocmd
-local usercmd = vim.api.nvim_create_user_command
+local nomap = vim.keymap.del
+local wk = require "which-key"
 
 -- map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+-- map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+-- Disable mappings
+nomap("n", "<C-n>")
+nomap("n", "<leader>b")
+nomap("n", "<leader>h")
+nomap("n", "<leader>v")
+nomap("n", "<leader>th")
+nomap("n", "<leader>n")
+nomap("n", "<leader>rn")
+nomap("n", "<leader>ds")
+nomap("n", "<leader>ma")
+nomap("n", "<leader>cm")
 
 -- vim-wordmotion
 map({ "n", "x", "o" }, "W", "<Plug>WordMotion_w", { desc = "Next word" })
@@ -27,53 +38,69 @@ map({ "n" }, "<c-k>", ":<C-U>TmuxNavigateUp<cr>", { noremap = true, silent = tru
 map({ "n" }, "<c-l>", ":<C-U>TmuxNavigateRight<cr>", { noremap = true, silent = true, desc = "" })
 map({ "n" }, "<c-\\>", ":<C-U>TmuxNavigatePrevious<cr>", { noremap = true, silent = true, desc = "" })
 
--- nvimtree
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-unmap("n", "<C-n>")
+-- which-key
+local icons = {
+  window = "",
+  buffer = "󱔗",
+  git = "",
+  print = "",
+  quit = "󰱝",
+  terminal = "",
+  lsp = "󰿘",
+  -- find = "",
+}
 
-map({ "n" }, "|", "<Cmd>vsplit<CR>", { desc = "Vertical Split" })
-map({ "n" }, "\\", "<Cmd>split<CR>", { desc = "Horizontal Split" })
+wk.add {
+  { "<leader>/", hidden = true },
+  {
+    "<leader>=",
+    function()
+      require("conform").format { lsp_fallback = true }
+    end,
+    desc = "general format file",
+    hidden = true,
+  },
+  { "<leader>x", hidden = true },
 
-map({ "n" }, "<leader>q", "<Cmd>confirm q<CR>", { desc = "Quit Window" })
-map({ "n" }, "<leader>Q", "<Cmd>confirm qall<CR>", { desc = "Exit NvChad" })
+  -- { "<leader>w", group = "Windows", icon = icons.window, proxy = "<c-w>" }, -- proxy to window mappings
+  { "<leader>w", group = "Windows", icon = icons.window },
 
--- Quit NvChad if only sidebar windows are list
-autocmd("BufEnter", {
-  callback = function()
-    local wins = vim.api.nvim_tabpage_list_wins(0)
-    -- Both NvimTree and aerial will auto-quit if there is only a single window left
-    -- if #wins <= 1 then return end
-    local sidebar_fts = { aerial = true, ["NvimTree"] = true }
-    for _, winid in ipairs(wins) do
-      if vim.api.nvim_win_is_valid(winid) then
-        local bufnr = vim.api.nvim_win_get_buf(winid)
-        local filetype = vim.bo[bufnr].filetype
-        -- If any visible windows are not sidebars, early return
-        if not sidebar_fts[filetype] then
-          return
-          -- If the visible window is a sidebar
-        else
-          -- only count filetypes once, so remove a found sidebar from the detection
-          sidebar_fts[filetype] = nil
-        end
-      end
-    end
-    if #vim.api.nvim_list_tabpages() > 1 then
-      vim.cmd.tabclose()
-    else
-      vim.cmd.qall()
-    end
-  end,
-})
+  { "<leader>g", group = "Git", icon = icons.git },
+  { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "telescope git commits" },
 
-usercmd("ListWins", function()
-  local wins = vim.api.nvim_tabpage_list_wins(0)
-  for _, winid in ipairs(wins) do
-    print("Window ID: " .. winid)
-    if vim.api.nvim_win_is_valid(winid) then
-      local bufnr = vim.api.nvim_win_get_buf(winid)
-      local filetype = vim.bo[bufnr].filetype
-      print("Buffer ID: " .. bufnr .. " Filetype: " .. (filetype ~= "" and filetype or "unknown"))
-    end
-  end
-end, {})
+  { "<leader>f", group = "Find" },
+  { "<leader>fm", "<cmd>Telescope marks<CR>", desc = "telescope find marks" },
+
+  { "<leader>l", group = "LSP", icon = icons.lsp },
+  { "<leader>ls", vim.diagnostic.setloclist, desc = "LSP diagnostic loclist" },
+  { "<leader>lr", require "nvchad.lsp.renamer", desc = "LSP NvRenamer" },
+  { "<leader>la", vim.lsp.buf.code_action, desc = "LSP Code action", mode = { "n", "v" } },
+  { "<leader>lh", vim.lsp.buf.signature_help, desc = "LSP Show signature help" },
+
+  -- stylua: ignore start
+  { "<leader>c", group = "Toggle" },
+  { "<leader>ct", function() require("nvchad.themes").open() end, desc = "telescope nvchad themes", },
+  { "<leader>cn", "<cmd>set nu!<CR>", desc = "toggle line number" },
+  { "<leader>cr", "<cmd>set rnu!<CR>", desc = "toggle relative number" },
+
+  { "<leader>t", group = "Terminal", icon = icons.terminal },
+  { "<leader>th", function() require("nvchad.term").new { pos = "sp" } end, desc = "terminal new horizontal term", },
+  { "<leader>tv", function() require("nvchad.term").new { pos = "vsp" } end, desc = "terminal new vertical term", },
+  { "<leader>tt", "<cmd>Telescope terms<CR>", desc = "telescope pick hidden term" },
+
+  { "<leader>b", group = "Buffers", icon = icons.buffer },
+  { "<leader>bb", desc = "buffers", expand = function() return require("which-key.extras").expand.buf() end, },
+
+  { "<leader>p", group = "Print", icon = icons.print },
+  { "<leader>pt", function() print "hello world" end, desc = "Foobar", },
+  -- stylua: ignore end
+
+  {
+    mode = { "n" },
+    { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "nvimtree toggle window", hidden = true },
+    { "<leader>q", "<Cmd>confirm q<CR>", desc = "Quit Window", icon = icons.quit },
+    { "<leader>Q", "<Cmd>confirm qall<CR>", desc = "Exit NvChad" },
+    { "|", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
+    { "\\", "<Cmd>split<CR>", desc = "Horizontal Split" },
+  },
+}
