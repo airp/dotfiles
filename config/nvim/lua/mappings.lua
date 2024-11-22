@@ -101,7 +101,7 @@ wk.add {
     { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "nvimtree toggle window", hidden = true },
     { "<leader>q", "<Cmd>confirm q<CR>", desc = "Quit Window", icon = icons.quit },
     { "<leader>Q", "<Cmd>confirm qall<CR>", desc = "Exit NvChad" },
-    { "|", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
-    { "\\", "<Cmd>split<CR>", desc = "Horizontal Split" },
+    { "<A-|>", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
+    { "<A-\\>", "<Cmd>split<CR>", desc = "Horizontal Split" },
   },
 }
