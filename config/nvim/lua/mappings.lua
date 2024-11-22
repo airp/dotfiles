@@ -90,6 +90,7 @@ wk.add {
 
   { "<leader>b", group = "Buffers", icon = icons.buffer },
   { "<leader>bb", desc = "buffers", expand = function() return require("which-key.extras").expand.buf() end, },
+  { "<leader>bc", "<cmd>CloseUnmodifiedGitBuffers<CR>", desc = "Close Unmodified Git Buffers" },
 
   { "<leader>p", group = "Print", icon = icons.print },
   { "<leader>pt", function() print "hello world" end, desc = "Foobar", },

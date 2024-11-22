@@ -41,3 +41,32 @@ usercmd("ListWins", function()
     end
   end
 end, {})
+
+usercmd("CloseUnmodifiedGitBuffers", function()
+  local gitsigns = require "gitsigns"
+  local buffers = vim.api.nvim_list_bufs()
+  local modified_buf = nil
+  local to_delete = {}
+
+  for _, buf in ipairs(buffers) do
+    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].modifiable and vim.fn.bufname(buf) ~= "" then
+      local ok, hunks = pcall(gitsigns.get_hunks, buf)
+      if ok and vim.tbl_isempty(hunks) then
+        table.insert(to_delete, buf)
+      else
+        if buf == vim.api.nvim_get_current_buf() or modified_buf == nil then
+          modified_buf = buf
+        end
+      end
+    end
+  end
+
+  if modified_buf and modified_buf ~= vim.api.nvim_get_current_buf() then
+    vim.api.nvim_set_current_buf(modified_buf)
+  end
+
+  for _, buf in ipairs(to_delete) do
+    -- print("Buffer ID: " .. buf .. " Buffer Name: " .. vim.fn.bufname(buf))
+    vim.api.nvim_buf_delete(buf, { force = true })
+  end
+end, {})
