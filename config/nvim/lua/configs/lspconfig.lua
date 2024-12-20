@@ -8,6 +8,7 @@ lspconfig.servers = {
   "lua_ls",
   "html",
   "cssls",
+  "jsonls",
   -- "clangd",
   "gopls",
   "pyright",
@@ -17,6 +18,7 @@ lspconfig.servers = {
 local default_servers = {
   "html",
   "cssls",
+  "jsonls",
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 

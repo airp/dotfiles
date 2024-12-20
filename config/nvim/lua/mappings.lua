@@ -103,5 +103,6 @@ wk.add {
     { "<leader>Q", "<Cmd>confirm qall<CR>", desc = "Exit NvChad" },
     { "<A-|>", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
     { "<A-\\>", "<Cmd>split<CR>", desc = "Horizontal Split" },
+    { "\\\\", "zz", desc = "Center the current line" },
   },
 }
