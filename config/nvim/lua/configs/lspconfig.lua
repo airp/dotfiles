@@ -29,9 +29,9 @@ local ooo = function(client, bufnr)
   nvlsp.on_attach(client, bufnr)
 
   local nomap = vim.keymap.del
-  nomap("n", "<leader>sh", { buffer = bufnr })
+  -- nomap("n", "<leader>sh", { buffer = bufnr })
   nomap("n", "<leader>ra", { buffer = bufnr })
-  nomap({ "n", "v" }, "<leader>ca", { buffer = bufnr })
+  -- nomap({ "n", "v" }, "<leader>ca", { buffer = bufnr })
 end
 
 -- lsps with default config
@@ -119,6 +119,7 @@ lspconfig.pyright.setup {
       analysis = {
         diagnosticSeverityOverrides = {
           -- reportUnusedVariable = false,
+          reportIncompatibleVariableOverride = false,
         },
       },
     },
