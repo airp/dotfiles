@@ -70,6 +70,17 @@ wk.add {
 
   { "<leader>f", group = "Find" },
   { "<leader>fm", "<cmd>Telescope marks<CR>", desc = "telescope find marks" },
+  {
+    "<leader>fr",
+    function()
+      require("telescope.builtin").live_grep {
+        additional_args = function()
+          return { "--word-regexp" }
+        end,
+      }
+    end,
+    desc = "telescope live grep (whole word)",
+  },
 
   { "<leader>l", group = "LSP", icon = icons.lsp },
   { "<leader>ls", vim.diagnostic.setloclist, desc = "LSP diagnostic loclist" },
