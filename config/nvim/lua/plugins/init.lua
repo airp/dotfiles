@@ -93,4 +93,8 @@ return {
   {
     require "configs.lazygit",
   },
+
+  {
+    require "configs.translate",
+  },
 }

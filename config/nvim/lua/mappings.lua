@@ -71,15 +71,26 @@ wk.add {
   { "<leader>f", group = "Find" },
   { "<leader>fm", "<cmd>Telescope marks<CR>", desc = "telescope find marks" },
   {
-    "<leader>fr",
+    "<leader>fw",
     function()
-      require("telescope.builtin").live_grep {
+      local grep_utils = require "utils.telescope_grep"
+      grep_utils.grep_with_text()
+    end,
+    desc = "telescope live grep",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>fW",
+    function()
+      local grep_utils = require "utils.telescope_grep"
+      grep_utils.grep_with_text {
         additional_args = function()
           return { "--word-regexp" }
         end,
       }
     end,
     desc = "telescope live grep (whole word)",
+    mode = { "n", "v" },
   },
 
   { "<leader>l", group = "LSP", icon = icons.lsp },
@@ -114,6 +125,5 @@ wk.add {
     { "<leader>Q", "<Cmd>confirm qall<CR>", desc = "Exit NvChad" },
     { "<A-|>", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
     { "<A-\\>", "<Cmd>split<CR>", desc = "Horizontal Split" },
-    { "\\\\", "zz", desc = "Center the current line" },
   },
 }
