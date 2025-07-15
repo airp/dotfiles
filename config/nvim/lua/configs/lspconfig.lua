@@ -9,6 +9,7 @@ lspconfig.servers = {
   "html",
   "cssls",
   "jsonls",
+  "intelephense",
   -- "clangd",
   "gopls",
   "pyright",
@@ -19,6 +20,7 @@ local default_servers = {
   "html",
   "cssls",
   "jsonls",
+  "intelephense",
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 
