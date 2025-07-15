@@ -38,6 +38,8 @@ map({ "n" }, "<c-k>", ":<C-U>TmuxNavigateUp<cr>", { noremap = true, silent = tru
 map({ "n" }, "<c-l>", ":<C-U>TmuxNavigateRight<cr>", { noremap = true, silent = true, desc = "" })
 map({ "n" }, "<c-\\>", ":<C-U>TmuxNavigatePrevious<cr>", { noremap = true, silent = true, desc = "" })
 
+map({ "n" }, "grr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP References via Telescope" })
+
 -- which-key
 local icons = {
   window = "",
@@ -98,6 +100,7 @@ wk.add {
   { "<leader>lr", require "nvchad.lsp.renamer", desc = "LSP NvRenamer" },
   { "<leader>la", vim.lsp.buf.code_action, desc = "LSP Code action", mode = { "n", "v" } },
   { "<leader>lh", vim.lsp.buf.signature_help, desc = "LSP Show signature help" },
+  -- { "<leader>lr", "<cmd>Telescope lsp_references<CR>", desc = "LSP References via Telescope" },
 
   -- stylua: ignore start
   { "<leader>c", group = "Toggle" },
