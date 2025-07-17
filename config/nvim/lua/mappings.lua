@@ -77,7 +77,7 @@ wk.add {
     "<leader>fw",
     function()
       local grep_utils = require "utils.telescope_grep"
-      grep_utils.grep_with_text()
+      grep_utils.grep_selected_text()
     end,
     desc = "telescope live grep",
     mode = { "n", "v" },
@@ -86,7 +86,7 @@ wk.add {
     "<leader>fW",
     function()
       local grep_utils = require "utils.telescope_grep"
-      grep_utils.grep_with_text {
+      grep_utils.grep_selected_text {
         additional_args = function()
           return { "--word-regexp" }
         end,
