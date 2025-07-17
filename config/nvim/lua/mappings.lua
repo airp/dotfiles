@@ -96,11 +96,35 @@ wk.add {
   },
 
   { "<leader>l", group = "LSP", icon = icons.lsp },
-  { "<leader>ls", vim.diagnostic.setloclist, desc = "LSP diagnostic loclist" },
   { "<leader>lr", require "nvchad.lsp.renamer", desc = "LSP NvRenamer" },
   { "<leader>la", vim.lsp.buf.code_action, desc = "LSP Code action", mode = { "n", "v" } },
   { "<leader>lh", vim.lsp.buf.signature_help, desc = "LSP Show signature help" },
-  -- { "<leader>lr", "<cmd>Telescope lsp_references<CR>", desc = "LSP References via Telescope" },
+  -- { "<leader>ls", vim.diagnostic.setloclist, desc = "LSP diagnostic loclist" },
+  {
+    "<leader>lb",
+    function()
+      require("telescope.builtin").diagnostics {
+        bufnr = 0, -- 当前 buffer
+      }
+    end,
+    desc = "LSP diagnostics: current buffer",
+  },
+  {
+    "<leader>ls",
+    function()
+      require("telescope.builtin").lsp_document_symbols()
+    end,
+    desc = "LSP Symbols: all kinds",
+  },
+  {
+    "<leader>lf",
+    function()
+      require("telescope.builtin").lsp_document_symbols {
+        symbols = { "function", "method" },
+      }
+    end,
+    desc = "LSP Symbols: functions & methods",
+  },
 
   -- stylua: ignore start
   { "<leader>c", group = "Toggle" },
