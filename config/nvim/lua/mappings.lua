@@ -49,6 +49,7 @@ local icons = {
   quit = "󰱝",
   terminal = "",
   lsp = "󰿘",
+  diagnostic = "󰇒",
   -- find = "",
 }
 
@@ -99,16 +100,6 @@ wk.add {
   { "<leader>lr", require "nvchad.lsp.renamer", desc = "LSP NvRenamer" },
   { "<leader>la", vim.lsp.buf.code_action, desc = "LSP Code action", mode = { "n", "v" } },
   { "<leader>lh", vim.lsp.buf.signature_help, desc = "LSP Show signature help" },
-  -- { "<leader>ls", vim.diagnostic.setloclist, desc = "LSP diagnostic loclist" },
-  {
-    "<leader>lb",
-    function()
-      require("telescope.builtin").diagnostics {
-        bufnr = 0, -- 当前 buffer
-      }
-    end,
-    desc = "LSP diagnostics: current buffer",
-  },
   {
     "<leader>ls",
     function()
@@ -124,6 +115,18 @@ wk.add {
       }
     end,
     desc = "LSP Symbols: functions & methods",
+  },
+
+  { "<leader>d", group = "Diagnostic", icon = icons.diagnostic },
+  -- { "<leader>ds", vim.diagnostic.setloclist, desc = "LSP diagnostic loclist" },
+  {
+    "<leader>db",
+    function()
+      require("telescope.builtin").diagnostics {
+        bufnr = 0, -- 当前 buffer
+      }
+    end,
+    desc = "LSP diagnostics: current buffer",
   },
 
   -- stylua: ignore start
