@@ -68,7 +68,7 @@ usercmd("CloseUnmodifiedGitBuffers", function()
         table.insert(to_delete, buf)
       else
         local ok, hunks = pcall(gitsigns.get_hunks, buf)
-        if ok and vim.tbl_isempty(hunks) then
+        if ok and vim.tbl_isempty(hunks or {}) then
           table.insert(to_delete, buf)
         else
           if buf == vim.api.nvim_get_current_buf() or modified_buf == nil then
