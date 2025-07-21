@@ -1,132 +1,77 @@
--- load defaults i.e lua_lsp
-require("nvchad.configs.lspconfig").defaults()
-
-local lspconfig = require "lspconfig"
-
--- list of all servers configured.
-lspconfig.servers = {
-  "lua_ls",
-  "html",
-  "cssls",
-  "jsonls",
-  "intelephense",
-  -- "clangd",
-  "gopls",
-  "pyright",
-}
-
--- list of servers configured with default config.
-local default_servers = {
-  "html",
-  "cssls",
-  "jsonls",
-  "intelephense",
-}
 local nvlsp = require "nvchad.configs.lspconfig"
+nvlsp.defaults()
 
-local ooo = function(client, bufnr)
+local function custom_on_attach(client, bufnr)
   -- disable built-in formatter from LSP.
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
+
   nvlsp.on_attach(client, bufnr)
 
   local nomap = vim.keymap.del
-  -- nomap("n", "<leader>sh", { buffer = bufnr })
   nomap("n", "<leader>ra", { buffer = bufnr })
-  -- nomap({ "n", "v" }, "<leader>ca", { buffer = bufnr })
+  nomap("n", "<leader>wl", { buffer = bufnr })
+  nomap("n", "<leader>wr", { buffer = bufnr })
+  nomap("n", "<leader>wa", { buffer = bufnr })
 end
 
--- lsps with default config
-for _, lsp in ipairs(default_servers) do
-  lspconfig[lsp].setup {
-    on_attach = ooo,
+local servers = {
+  lua_ls = {},
+  html = {},
+  cssls = {},
+  jsonls = {},
+  intelephense = {},
+  gopls = {
+    settings = {
+      gopls = {
+        completeUnimported = true,
+        usePlaceholders = true,
+        staticcheck = true,
+        analyses = {
+          unusedparams = true,
+        },
+      },
+    },
+  },
+  pyright = {
+    -- https://github.com/microsoft/pyright/discussions/5852
+    -- https://www.reddit.com/r/neovim/comments/11k5but/how_to_disable_pyright_diagnostics/
+    capabilities = (function()
+      local cap = nvlsp.capabilities
+      cap.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+      return cap
+    end)(),
+    settings = {
+      python = {
+        analysis = {
+          diagnosticSeverityOverrides = {
+            -- reportUnusedVariable = false,
+            reportIncompatibleVariableOverride = false,
+          },
+        },
+      },
+    },
+  },
+}
+
+for name, opts in pairs(servers) do
+  local base_opts = {
+    on_attach = custom_on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
   }
+
+  local final_opts = vim.tbl_deep_extend("force", base_opts, opts)
+
+  vim.lsp.enable(name)
+  vim.lsp.config(name, final_opts)
 end
 
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
-
-lspconfig.lua_ls.setup {
-  on_attach = ooo,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- enable = false, -- Disable all diagnostics from lua_ls
-        -- globals = { "vim" },
-      },
-      -- Disable: Undefined global `vim`.
-      workspace = {
-        library = {
-          vim.fn.expand "$VIMRUNTIME/lua",
-          vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
-          vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
-          vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
-        },
-        maxPreload = 100000,
-        preloadFileSize = 10000,
-      },
-    },
-  },
-}
-
--- lspconfig.clangd.setup {
---   on_attach = function(client, bufnr)
---     client.server_capabilities.documentFormattingProvider = false
---     client.server_capabilities.documentRangeFormattingProvider = false
---     nvlsp.on_attach(client, bufnr)
---   end,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
-
-lspconfig.gopls.setup {
-  on_attach = ooo,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  cmd = { "gopls" },
-  filetypes = { "go", "gomod", "gowork", "gotmpl" },
-  rootdir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-  settings = {
-    gopls = {
-      completeUnimported = true,
-      usePlaceholders = true,
-      staticcheck = true,
-      analyses = {
-        unusedparams = true,
-      },
-    },
-  },
-}
-
-lspconfig.pyright.setup {
-  on_attach = ooo,
-  on_init = nvlsp.on_init,
-  -- https://github.com/microsoft/pyright/discussions/5852#discussioncomment-6874502
-  -- https://www.reddit.com/r/neovim/comments/11k5but/how_to_disable_pyright_diagnostics/
-  capabilities = (function()
-    local cap = nvlsp.capabilities
-    cap.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-    return cap
-  end)(),
-  settings = {
-    python = {
-      analysis = {
-        diagnosticSeverityOverrides = {
-          -- reportUnusedVariable = false,
-          reportIncompatibleVariableOverride = false,
-        },
-      },
-    },
-  },
-}
+local lspconfig = require "lspconfig"
+lspconfig.servers = {}
+for name, _ in pairs(servers) do
+  table.insert(lspconfig.servers, name)
+end
 
 -- vim.diagnostic.config {
 --   virtual_text = {

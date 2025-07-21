@@ -22,6 +22,8 @@ nomap("n", "<leader>rn")
 nomap("n", "<leader>ds")
 nomap("n", "<leader>ma")
 nomap("n", "<leader>cm")
+nomap("n", "<leader>wk")
+nomap("n", "<leader>wK")
 
 -- vim-wordmotion
 map({ "n", "x", "o" }, "W", "<Plug>WordMotion_w", { desc = "Next word" })
@@ -66,7 +68,7 @@ wk.add {
   { "<leader>x", hidden = true },
 
   -- { "<leader>w", group = "Windows", icon = icons.window, proxy = "<c-w>" }, -- proxy to window mappings
-  { "<leader>w", group = "Windows", icon = icons.window },
+  -- { "<leader>w", group = "Windows", icon = icons.window },
 
   { "<leader>g", group = "Git", icon = icons.git },
   { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "telescope git commits" },
