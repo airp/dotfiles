@@ -48,6 +48,7 @@ local icons = {
   buffer = "󱔗",
   git = "",
   print = "",
+  save = "󰆔",
   quit = "󰱝",
   terminal = "",
   lsp = "󰿘",
@@ -68,7 +69,6 @@ wk.add {
   { "<leader>x", hidden = true },
 
   -- { "<leader>w", group = "Windows", icon = icons.window, proxy = "<c-w>" }, -- proxy to window mappings
-  -- { "<leader>w", group = "Windows", icon = icons.window },
 
   { "<leader>g", group = "Git", icon = icons.git },
   { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "telescope git commits" },
@@ -153,6 +153,7 @@ wk.add {
   {
     mode = { "n" },
     { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "nvimtree toggle window", hidden = true },
+    { "<leader>w", "<cmd>w<CR>", desc = "Save File", icon = icons.save },
     { "<leader>q", "<Cmd>confirm q<CR>", desc = "Quit Window", icon = icons.quit },
     { "<leader>Q", "<Cmd>confirm qall<CR>", desc = "Exit NvChad" },
     { "<A-|>", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
