@@ -14,14 +14,10 @@ local wk = require "which-key"
 -- Disable mappings
 nomap("n", "<C-n>")
 nomap("n", "<leader>b")
-nomap("n", "<leader>h")
-nomap("n", "<leader>v")
-nomap("n", "<leader>th")
-nomap("n", "<leader>n")
-nomap("n", "<leader>rn")
 nomap("n", "<leader>ds")
 nomap("n", "<leader>ma")
 nomap("n", "<leader>cm")
+-- Unmapped key
 nomap("n", "<leader>wk")
 nomap("n", "<leader>wK")
 
@@ -47,6 +43,7 @@ local icons = {
   window = "",
   buffer = "󱔗",
   git = "",
+  close = "󰅙",
   print = "",
   save = "󰆔",
   quit = "󰱝",
@@ -120,31 +117,24 @@ wk.add {
   },
 
   { "<leader>d", group = "Diagnostic", icon = icons.diagnostic },
-  -- { "<leader>ds", vim.diagnostic.setloclist, desc = "LSP diagnostic loclist" },
   {
-    "<leader>db",
+    "<leader>ds",
     function()
       require("telescope.builtin").diagnostics {
         bufnr = 0, -- 当前 buffer
       }
     end,
-    desc = "LSP diagnostics: current buffer",
+    desc = "LSP diagnostic loclist",
   },
 
   -- stylua: ignore start
-  { "<leader>c", group = "Toggle" },
-  { "<leader>ct", function() require("nvchad.themes").open() end, desc = "telescope nvchad themes", },
-  { "<leader>cn", "<cmd>set nu!<CR>", desc = "toggle line number" },
-  { "<leader>cr", "<cmd>set rnu!<CR>", desc = "toggle relative number" },
+  { "<leader>c", group = "Close", icon = icons.close },
+  { "<leader>cu", "<cmd>CloseUnmodifiedGitBuffers<CR>", desc = "Close Unmodified Git Buffers" },
 
-  { "<leader>t", group = "Terminal", icon = icons.terminal },
-  { "<leader>th", function() require("nvchad.term").new { pos = "sp" } end, desc = "terminal new horizontal term", },
-  { "<leader>tv", function() require("nvchad.term").new { pos = "vsp" } end, desc = "terminal new vertical term", },
-  { "<leader>tt", "<cmd>Telescope terms<CR>", desc = "telescope pick hidden term" },
+  { "<leader>t", group = "Toggle" },
 
   { "<leader>b", group = "Buffers", icon = icons.buffer },
   { "<leader>bb", desc = "buffers", expand = function() return require("which-key.extras").expand.buf() end, },
-  { "<leader>bc", "<cmd>CloseUnmodifiedGitBuffers<CR>", desc = "Close Unmodified Git Buffers" },
 
   { "<leader>p", group = "Print", icon = icons.print },
   { "<leader>pt", function() print "hello world" end, desc = "Foobar", },
