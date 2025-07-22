@@ -46,7 +46,7 @@ require("gitsigns").setup {
     -- map("n", "<leader>hD", function()
     --   gitsigns.diffthis "~"
     -- end)
-    map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "gitsigns toggle deleted" })
+    map("n", "<leader>gd", gitsigns.toggle_deleted, { desc = "gitsigns toggle deleted" })
 
     -- Text object
     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
