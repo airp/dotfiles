@@ -64,6 +64,7 @@ wk.add {
     hidden = true,
   },
   { "<leader>x", hidden = true },
+  { "<leader>r", hidden = true },
 
   -- { "<leader>w", group = "Windows", icon = icons.window, proxy = "<c-w>" }, -- proxy to window mappings
 
