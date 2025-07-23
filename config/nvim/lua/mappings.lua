@@ -12,11 +12,11 @@ local wk = require "which-key"
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- Disable mappings
-nomap("n", "<C-n>")
-nomap("n", "<leader>b")
-nomap("n", "<leader>ds")
-nomap("n", "<leader>ma")
-nomap("n", "<leader>cm")
+nomap("n", "<C-n>") -- nvimtree toggle window
+nomap("n", "<leader>b") -- buffer new
+nomap("n", "<leader>ds") -- LSP diagnostic loclist
+nomap("n", "<leader>ma") -- telescope find marks
+nomap("n", "<leader>cm") -- telescope git commits
 -- Unmapped key
 nomap("n", "<leader>wk")
 nomap("n", "<leader>wK")
@@ -134,7 +134,8 @@ wk.add {
   { "<leader>t", group = "Toggle" },
 
   { "<leader>b", group = "Buffers", icon = icons.buffer },
-  { "<leader>bb", desc = "buffers", expand = function() return require("which-key.extras").expand.buf() end, },
+  { "<leader>bb", "<Cmd>enew<CR>", desc = "buffer new" },
+  { "<leader>bc", desc = "buffers", expand = function() return require("which-key.extras").expand.buf() end, },
 
   { "<leader>p", group = "Print", icon = icons.print },
   { "<leader>pt", function() print "hello world" end, desc = "Foobar", },
@@ -142,8 +143,8 @@ wk.add {
 
   {
     mode = { "n" },
-    { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "nvimtree toggle window", hidden = true },
-    { "<leader>w", "<cmd>w<CR>", desc = "Save File", icon = icons.save },
+    { "<leader>e", "<Cmd>NvimTreeToggle<CR>", desc = "nvimtree toggle window", hidden = true },
+    { "<leader>w", "<Cmd>w<CR>", desc = "Save File", hidden = true },
     { "<leader>q", "<Cmd>confirm q<CR>", desc = "Quit Window", icon = icons.quit },
     { "<leader>Q", "<Cmd>confirm qall<CR>", desc = "Exit NvChad" },
     { "<A-|>", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
