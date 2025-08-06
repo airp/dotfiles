@@ -191,13 +191,13 @@ q-add () {
 
 # Modified version where you can press
 #   - CTRL-O to open with `open` command,
-#   - CTRL-E or Enter key to open with the $EDITOR
+#   - CTRL-E or Enter key to open with `nvim` command.
 p() {
     IFS=$'\n' out=("$(fzf --preview 'cat {}' --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
     key=$(head -1 <<< "$out")
     file=$(head -2 <<< "$out" | tail -1)
     if [ -n "$file" ]; then
-        [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+        [ "$key" = ctrl-o ] && open "$file" || nvim "$file"
     fi
 }
 
