@@ -3,6 +3,20 @@ require "nvchad.autocmds"
 local autocmd = vim.api.nvim_create_autocmd
 local usercmd = vim.api.nvim_create_user_command
 
+local uv = vim.uv
+
+autocmd({ "VimEnter", "VimLeave" }, {
+  callback = function()
+    if vim.env.TMUX_PLUGIN_MANAGER_PATH then
+      uv.spawn(
+        vim.env.TMUX_PLUGIN_MANAGER_PATH .. "/tmux-window-name/scripts/rename_session_windows.py",
+        {},
+        function() end
+      )
+    end
+  end,
+})
+
 usercmd("ListWins", function()
   local wins = vim.api.nvim_tabpage_list_wins(0)
   for _, winid in ipairs(wins) do
