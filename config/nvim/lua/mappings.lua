@@ -30,11 +30,14 @@ map({ "x", "o" }, "aW", "<Plug>WordMotion_aw", { desc = "word with ws" })
 map({ "x", "o" }, "iW", "<Plug>WordMotion_iw", { desc = "inner word" })
 
 -- vim-tmux-navigator
-map({ "n" }, "<c-h>", ":<C-U>TmuxNavigateLeft<cr>", { noremap = true, silent = true, desc = "" })
-map({ "n" }, "<c-j>", ":<C-U>TmuxNavigateDown<cr>", { noremap = true, silent = true, desc = "" })
-map({ "n" }, "<c-k>", ":<C-U>TmuxNavigateUp<cr>", { noremap = true, silent = true, desc = "" })
-map({ "n" }, "<c-l>", ":<C-U>TmuxNavigateRight<cr>", { noremap = true, silent = true, desc = "" })
-map({ "n" }, "<c-\\>", ":<C-U>TmuxNavigatePrevious<cr>", { noremap = true, silent = true, desc = "" })
+map({ "n" }, "<C-h>", ":<C-U>TmuxNavigateLeft<CR>", { silent = true, desc = "" })
+map({ "n" }, "<C-j>", ":<C-U>TmuxNavigateDown<CR>", { silent = true, desc = "" })
+map({ "n" }, "<C-k>", ":<C-U>TmuxNavigateUp<CR>", { silent = true, desc = "" })
+map({ "n" }, "<C-l>", ":<C-U>TmuxNavigateRight<CR>", { silent = true, desc = "" })
+map({ "n" }, "<C-\\>", ":<C-U>TmuxNavigatePrevious<CR>", { silent = true, desc = "" })
+
+map({ "n" }, "J", "5j", { desc = "Move down 5 lines" })
+map({ "n" }, "K", "5k", { desc = "Move up 5 lines" })
 
 map({ "n" }, "grr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP References via Telescope" })
 
@@ -52,7 +55,6 @@ local icons = {
   diagnostic = "󰇒",
   -- find = "",
 }
-
 wk.add {
   { "<leader>/", hidden = true },
   {
@@ -98,6 +100,7 @@ wk.add {
 
   { "<leader>l", group = "LSP", icon = icons.lsp },
   { "<leader>lr", require "nvchad.lsp.renamer", desc = "LSP NvRenamer" },
+  { "<leader>lk", vim.lsp.buf.hover, desc = "LSP Hover" },
   { "<leader>la", vim.lsp.buf.code_action, desc = "LSP Code action", mode = { "n", "v" } },
   { "<leader>lh", vim.lsp.buf.signature_help, desc = "LSP Show signature help" },
   {
