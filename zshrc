@@ -225,18 +225,41 @@ tmux-window-name() {
 	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
 }
 
-tmux-window-name-preexec() {
+add-zsh-hook chpwd tmux-window-name
+
+function mark_tmux_window_dirty() {
+  echo "1" > ~/.tmux_rename_flag
+}
+
+function tmux_window_name_preexec() {
   if [ -z "$TMUX" ]; then
     return
   fi
 
   local cmd="${1%% *}"
-
   case "$cmd" in
-    git|python3|tail|less)
-      ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+    ssh|git|go|node|python|python3|docker|tail|less)
+      mark_tmux_window_dirty
       ;;
   esac
 }
-add-zsh-hook chpwd tmux-window-name
-add-zsh-hook preexec tmux-window-name-preexec
+add-zsh-hook preexec tmux_window_name_preexec
+
+function tmux_window_name_precmd() {
+  if [ -z "$TMUX" ]; then
+    return
+  fi
+
+  mark_tmux_window_dirty
+}
+add-zsh-hook precmd tmux_window_name_precmd
+
+function start_tmux_rename_monitor() {
+  if [ -n "$TMUX" ]; then
+    pgrep -f "loop_inotify.py" >/dev/null || {
+      nohup python3 ~/Documents/scripts/loop_inotify.py >/dev/null 2>&1 &
+    }
+  fi
+}
+
+start_tmux_rename_monitor
