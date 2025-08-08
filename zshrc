@@ -224,4 +224,19 @@ tmux-window-name() {
 
 	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
 }
+
+tmux-window-name-preexec() {
+  if [ -z "$TMUX" ]; then
+    return
+  fi
+
+  local cmd="${1%% *}"
+
+  case "$cmd" in
+    git|python3|tail|less)
+      ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+      ;;
+  esac
+}
 add-zsh-hook chpwd tmux-window-name
+add-zsh-hook preexec tmux-window-name-preexec
