@@ -239,6 +239,7 @@ function tmux_window_name_preexec() {
   local cmd="${1%% *}"
   case "$cmd" in
     ssh|git|go|node|python|python3|docker|tail|less)
+      LAST_CMD="$1"
       mark_tmux_window_dirty
       ;;
   esac
@@ -250,7 +251,10 @@ function tmux_window_name_precmd() {
     return
   fi
 
-  mark_tmux_window_dirty
+  if [ -n "$LAST_CMD" ]; then
+    LAST_CMD=""
+    mark_tmux_window_dirty
+  fi
 }
 add-zsh-hook precmd tmux_window_name_precmd
 
