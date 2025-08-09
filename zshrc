@@ -236,9 +236,9 @@ function tmux_window_name_preexec() {
     return
   fi
 
-  local cmd="${1%% *}"
+  local cmd="$(basename "${1%% *}")"
   case "$cmd" in
-    ssh|git|go|node|python|python3|docker|tail|less)
+    jssh.sh|ssh|git|go|python3|python|node|docker|tail|less|more)
       LAST_CMD="$1"
       mark_tmux_window_dirty
       ;;
@@ -261,7 +261,7 @@ add-zsh-hook precmd tmux_window_name_precmd
 function start_tmux_rename_monitor() {
   if [ -n "$TMUX" ]; then
     pgrep -f "loop_inotify.py" >/dev/null || {
-      nohup python3 ~/Documents/scripts/loop_inotify.py >/dev/null 2>&1 &
+      ( setsid bash -c 'exec python3 ~/Documents/scripts/loop_inotify.py >/dev/null 2>&1' & )
     }
   fi
 }
