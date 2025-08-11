@@ -215,8 +215,6 @@ F() {
     rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
-export PATH=$PATH:/usr/local/go/bin
-
 tmux-window-name() {
   if [ -z "$TMUX" ]; then
     return
@@ -267,3 +265,5 @@ function start_tmux_rename_monitor() {
 }
 
 start_tmux_rename_monitor
+
+export PATH=$PATH:/usr/local/go/bin
