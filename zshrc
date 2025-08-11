@@ -234,7 +234,8 @@ function tmux_window_name_preexec() {
     return
   fi
 
-  local cmd="$(basename "${1%% *}")"
+  local cmd="$(basename "${1## }")"
+  cmd="${cmd%% *}"
   case "$cmd" in
     jssh.sh|ssh|git|go|python3|python|node|docker|tail|less|more)
       LAST_CMD="$1"

@@ -1,0 +1,18 @@
+session_name: xybc
+windows:
+  - window_name: vim
+    panes:
+      - shell_command:
+        - tmux rename-window ''
+        - vim
+    start_directory: "~/Documents/wbb/gogames"
+  - window_name: jump
+    panes:
+      - shell_command:
+        - tmux rename-window -t "$(tmux display-message -p '#S'):2" ''
+        - ssh xybc-jump
+  - window_name: gitea
+    panes:
+      - shell_command:
+        - tmux rename-window -t "$(tmux display-message -p '#S'):3" ''
+        - ssh xybc-gitea
