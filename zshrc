@@ -266,4 +266,7 @@ function start_tmux_rename_monitor() {
 
 start_tmux_rename_monitor
 
+# Disable automatic title update for tmuxp
+export DISABLE_AUTO_TITLE='true'
+
 export PATH=$PATH:/usr/local/go/bin
