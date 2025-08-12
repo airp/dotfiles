@@ -36,8 +36,8 @@ map({ "n" }, "<C-k>", ":<C-U>TmuxNavigateUp<CR>", { silent = true, desc = "" })
 map({ "n" }, "<C-l>", ":<C-U>TmuxNavigateRight<CR>", { silent = true, desc = "" })
 map({ "n" }, "<C-\\>", ":<C-U>TmuxNavigatePrevious<CR>", { silent = true, desc = "" })
 
-map({ "n" }, "J", "5j", { desc = "Move down 5 lines" })
-map({ "n" }, "K", "5k", { desc = "Move up 5 lines" })
+map({ "n", "v" }, "J", "5j", { desc = "Move down 5 lines" })
+map({ "n", "v" }, "K", "5k", { desc = "Move up 5 lines" })
 
 map({ "n" }, "grr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP References via Telescope" })
 
@@ -55,6 +55,7 @@ local icons = {
   diagnostic = "󰇒",
   -- find = "",
 }
+
 wk.add {
   { "<leader>/", hidden = true },
   {
@@ -153,5 +154,9 @@ wk.add {
     { "<leader>Q", "<Cmd>confirm qall<CR>", desc = "Exit NvChad" },
     { "<A-|>", "<Cmd>vsplit<CR>", desc = "Vertical Split" },
     { "<A-\\>", "<Cmd>split<CR>", desc = "Horizontal Split" },
+  },
+  {
+    mode = { "n", "v" },
+    { "<leader>j", "J", desc = "Join lines" },
   },
 }
