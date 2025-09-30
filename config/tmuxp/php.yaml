@@ -1,0 +1,28 @@
+session_name: php
+windows:
+  - window_name: php
+    panes:
+      - shell_command:
+        - tmux rename-window ''
+        - vim
+    start_directory: "~/Documents/wbb/php"
+  - window_name: ''
+    panes:
+      - shell_command:
+        - tmux rename-window -t "$(tmux display-message -p '#S'):2" ''
+    start_directory: "~/Documents/wbb/php/india-mm"
+  - window_name: india-admin
+    panes:
+      - shell_command:
+        - tmux rename-window -t "$(tmux display-message -p '#S'):3" ''
+    start_directory: "~/Documents/wbb/php/india-admin"
+  - window_name: india-sso
+    panes:
+      - shell_command:
+        - tmux rename-window -t "$(tmux display-message -p '#S'):4" ''
+    start_directory: "~/Documents/wbb/php/india-sso"
+  - window_name: india-lc
+    panes:
+      - shell_command:
+        - tmux rename-window -t "$(tmux display-message -p '#S'):5" ''
+    start_directory: "~/Documents/wbb/php/india-lc"
