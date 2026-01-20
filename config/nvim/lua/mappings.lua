@@ -135,6 +135,14 @@ wk.add {
   -- stylua: ignore start
   { "<leader>c", group = "Close", icon = icons.close },
   { "<leader>cu", "<cmd>CloseUnmodifiedGitBuffers<CR>", desc = "Close Unmodified Git Buffers" },
+  {
+    "<leader>cf",
+    function()
+      require("utils.cfdo_replace").cfdo_replace_confirm()
+    end,
+    desc = "Quickfix replace (confirm)",
+    mode = { "n" },
+  },
 
   { "<leader>t", group = "Toggle" },
 
