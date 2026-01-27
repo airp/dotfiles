@@ -270,4 +270,6 @@ start_tmux_rename_monitor
 # Disable automatic title update for tmuxp
 export DISABLE_AUTO_TITLE='true'
 
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:/home/airp/go/bin
+
+export GOOGLE_CLOUD_PROJECT=cool-1230

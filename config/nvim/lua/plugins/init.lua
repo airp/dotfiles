@@ -100,4 +100,8 @@ return {
   {
     require "configs.translate",
   },
+
+  {
+    require "configs.hardtime",
+  },
 }

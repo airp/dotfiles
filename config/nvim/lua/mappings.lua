@@ -31,13 +31,29 @@ map({ "x", "o" }, "iW", "<Plug>WordMotion_iw", { desc = "inner word" })
 
 -- vim-tmux-navigator
 map({ "n" }, "<C-h>", ":<C-U>TmuxNavigateLeft<CR>", { silent = true, desc = "" })
-map({ "n" }, "<C-j>", ":<C-U>TmuxNavigateDown<CR>", { silent = true, desc = "" })
-map({ "n" }, "<C-k>", ":<C-U>TmuxNavigateUp<CR>", { silent = true, desc = "" })
+-- map({ "n" }, "<C-j>", ":<C-U>TmuxNavigateDown<CR>", { silent = true, desc = "" })
+-- map({ "n" }, "<C-k>", ":<C-U>TmuxNavigateUp<CR>", { silent = true, desc = "" })
 map({ "n" }, "<C-l>", ":<C-U>TmuxNavigateRight<CR>", { silent = true, desc = "" })
 map({ "n" }, "<C-\\>", ":<C-U>TmuxNavigatePrevious<CR>", { silent = true, desc = "" })
 
-map({ "n", "v" }, "J", "5j", { desc = "Move down 5 lines" })
-map({ "n", "v" }, "K", "5k", { desc = "Move up 5 lines" })
+map("n", "<C-j>", function()
+  if vim.fn.line "." == vim.fn.line "$" then
+    return ":<C-U>TmuxNavigateDown<CR>"
+  else
+    return "5j"
+  end
+end, { expr = true, silent = true })
+
+map("n", "<C-k>", function()
+  if vim.fn.line "." == 1 then
+    return ":<C-U>TmuxNavigateUp<CR>"
+  else
+    return "5k"
+  end
+end, { expr = true, silent = true })
+
+map("v", "<C-j>", "5j", { desc = "Move down 5 lines" })
+map("v", "<C-k>", "5k", { desc = "Move up 5 lines" })
 
 map({ "n" }, "grr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP References via Telescope" })
 
