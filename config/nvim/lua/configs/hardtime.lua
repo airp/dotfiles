@@ -5,5 +5,6 @@ return {
   opts = {
     disabled_keys = { ["<Up>"] = false, ["<Down>"] = false, ["<Left>"] = false, ["<Right>"] = false },
     -- disabled_filetypes = { ["neo-tree"] = true },
+    max_count = 4,
   },
 }
